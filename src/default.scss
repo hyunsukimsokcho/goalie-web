@@ -1,0 +1,19 @@
+
+$goalie-red: #ff2063;
+$goalie-blue: #b3d4fc;
+$goalie-black: #282c34;
+$white: #ffffff;
+$black: #000000;
+$dark-gray: #9b9b9b;
+$gray: #c7c7c7;
+$light-gray: #f0f0f0;
+
+$bp-laptop: 1060px;
+
+div, p {
+  font-size: 14px;
+}
+
+input:focus, textarea {
+  outline: none !important;
+}

@@ -1,0 +1,14 @@
+{
+  "navbar.signin": "로그인",
+  "navbar.signup": "회원가입",
+  "navbar.recommend": "오늘의 추천 문제",
+  "navbar.recent": "최근 문제 보러가기",
+
+  "problemtab.all": "전체",
+  "problemtab.wip": "진행중",
+  "problemtab.solved": "완료",
+
+  "problemTableEntry.number": "번호",
+  "problemTableEntry.name": "이름",
+  "problemTableEntry.correctRate": "정답률"
+}

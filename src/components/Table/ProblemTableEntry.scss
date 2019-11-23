@@ -1,0 +1,33 @@
+@import '../../default.scss';
+
+.problem-table-entry-container {
+  width: 1012px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  padding: 20px 25px;
+  margin: 0 auto;
+  @media (max-width: $bp-laptop) {
+    width: 100%;
+  }
+  &.table-header {
+    padding: 13px 25px;
+    box-sizing: border-box;
+    background-color: #F6F9FC;
+    font-size: 12px !important;
+    color: #8898AA;
+  }
+  .problem-number {
+    width: 100px;
+    font-size: inherit;
+  }
+
+  .problem-name {
+    width: 700px;
+    font-size: inherit;
+  }
+  .problem-correct-rate {
+    width: 212px;
+    font-size: inherit;
+  }
+}

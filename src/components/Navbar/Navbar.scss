@@ -1,0 +1,173 @@
+@import '../../default.scss';
+
+.navbar-container {
+  height: 66px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  border: 0.5px solid $goalie-black;
+  display: flex;
+  justify-content: space-between;
+  z-index: 100;
+  padding: 0 20px;
+  background: $goalie-black;
+  border-bottom: 1px solid $black;
+
+  .navbar-inner-container {
+    width: 1012px;
+    display: flex;
+    margin: 0 auto;
+
+    .logo {
+      height: 35px;
+      margin: 21px 0;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .main-buttons {
+      display: flex;
+      padding: 13px 0;
+      margin-left: 15px;
+      font-weight: bold;
+
+      .project-look-around {
+        width: 140px;
+        height: 40px;
+
+        line-height: 40px;
+        text-align: center;
+        color: $white;
+
+        .text {
+          display: inline;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+
+      .project-start {
+        width: 140px;
+        height: 40px;
+
+        line-height: 40px;
+        text-align: center;
+        color: $white;
+
+        background-color: $goalie-red;
+        border-radius: 2px;
+        margin-left: 8px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .search-and-sub-buttons {
+      display: flex;
+      padding: 18px 0;
+      float: right;
+      margin-left: auto;
+      color: $white;
+
+      .search-container {
+        width: 260px;
+        height: 30px;
+        border: 1px solid #c8c8c8;
+        display: inline-block;
+        margin-right: 15px;
+        padding: 5px 10px;
+        box-sizing: border-box;
+
+        .search-input {
+          width: 215px;
+          border: 0px solid;
+          font-size: 12px;
+        }
+
+        .search-icon {
+          width: 16px;
+          height: 16px;
+          float: right;
+          margin-left: auto;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+      
+      .signin {
+        width: 49px;
+        line-height: 30px;
+        text-align: center;
+        margin-left: 15px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .signup {
+        width: 49px;
+        line-height: 30px;
+        text-align: center;
+        margin: 0 15px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .set-lang {
+        position: relative;
+        width: 36px;
+        height: 20px;
+        background-color: #aaaaaa;
+        border-radius: 2px;
+
+        line-height: 20px;
+        text-align: center;
+        color: $white;
+        margin: auto;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        .lang-dropdown {
+          position: absolute;
+          right: 0px;
+
+          &:hover {
+            cursor: default;
+          }
+
+          .lang-select-row {
+            position: relative;
+            width: 75px;
+            height: 35px;
+            background-color: $light-gray;
+            
+            line-height: 35px;
+            text-align: center;
+            color: $black;
+
+            .flag {
+              width: auto;
+              height: 15px;
+              margin-right: 10px;
+              vertical-align: middle;
+            }
+
+            &:hover {
+              background-color: $gray;
+            }
+          }
+        }
+      }
+    }
+  }
+}

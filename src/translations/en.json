@@ -1,0 +1,14 @@
+{
+  "navbar.signin": "Sign in",
+  "navbar.signup": "Sign up",
+  "navbar.recommend": "Today's problem",
+  "navbar.recent": "Go last problem",
+
+  "problemtab.all": "All",
+  "problemtab.wip": "In progress",
+  "problemtab.solved": "Solved",
+
+  "problemTableEntry.number": "#",
+  "problemTableEntry.name": "NAME",
+  "problemTableEntry.correctRate": "CORRECT RATE"
+}
