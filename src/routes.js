@@ -3,7 +3,6 @@ import { Route } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 
 const Routes = props => {
-
   return (
     <div>
       <Route path="/" component={MainPage} />

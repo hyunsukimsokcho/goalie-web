@@ -26,7 +26,7 @@ const language = navigator.language.split(/[-_]/)[0];
 
 const history = createBrowserHistory();
 const initialState = window.initialReduxState;
-const store = configureStore(history, initialState);
+const store = configureStore(initialState, history);
 
 ReactDOM.render(
   <IntlProvider

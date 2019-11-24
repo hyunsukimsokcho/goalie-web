@@ -1,10 +1,15 @@
 import React from 'react';
 import './ProblemTableEntry.scss';
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 
 const ProblemTableEntry = props => {
   return (
-    <div className={`problem-table-entry-container ${props.isHeader ? 'table-header' : ''}`}>
+    <div 
+      className={`problem-table-entry-container ${props.isHeader ? 'table-header' : ''}`}
+      onClick={()=>props.push(`/${props.problem.id}`)}
+    >
       <div className={'problem-number'}>
         <FormattedMessage id={props.isHeader ? 'problemTableEntry.number' : props.number} />
       </div>
@@ -17,5 +22,5 @@ const ProblemTableEntry = props => {
     </div>
   );
 }
-
-export default ProblemTableEntry;
+// export default ProblemTableEntry;
+export default connect(null, { push })(ProblemTableEntry);

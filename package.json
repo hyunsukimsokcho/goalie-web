@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "connected-react-router": "^6.6.0",
+    "connected-react-router": "^6.5.2",
     "history": "^4.10.1",
     "node-sass": "^4.13.0",
     "react": "^16.11.0",
