@@ -20,14 +20,23 @@
   .problem-number {
     width: 100px;
     font-size: inherit;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   .problem-name {
     width: 700px;
     font-size: inherit;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
   .problem-correct-rate {
     width: 212px;
     font-size: inherit;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 }
