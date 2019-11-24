@@ -4,11 +4,11 @@ import './ProblemTable.scss';
 
 const ProblemTable = props => {
   return (
-    <div className={'problem-table-conatiner'}>
+    <div className={'problem-table-container'}>
       <ProblemTableEntry isHeader={true} />
       {
-        props.problemList.map(problem => {
-          return (<ProblemTableEntry problem={problem} />);
+        props.problemListCollection[props.currShownList.key].map((problem, i) => {
+          return (<ProblemTableEntry key={i+1} number={i+1} problem={problem} />);
         })
       }
     </div>

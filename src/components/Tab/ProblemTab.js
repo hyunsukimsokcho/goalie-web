@@ -1,29 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './ProblemTab.scss';
 import { FormattedMessage } from 'react-intl';
 
-const ProblemTab = () => {
+const ProblemTab = props => {
 
   const tabList = [
-    {id: 'problemtab.all'},
-    {id: 'problemtab.wip'},
-    {id: 'problemtab.solved'}
+    {key: 0, id: 'problemtab.all'},
+    {key: 1, id: 'problemtab.wip'},
+    {key: 2, id: 'problemtab.solved'}
   ];
-
-  const [ currClickedItem, setClickedItem ] = useState(tabList[0]);
   return (
     <div className={"problem-tab-container"}>
       {
         tabList
           .map(tab => (
             <div
-              className={`tab-item ${currClickedItem.id === tab.id ? "clicked" : ""}`} 
+              className={`tab-item ${props.currClickedItem.id === tab.id ? "clicked" : ""}`} 
               key={tab.id}
-              onClick={()=>setClickedItem(tab)}
+              onClick={()=>props.setClickedItem(tab)}
             >
               <FormattedMessage id={tab.id} />
               {
-                currClickedItem.id === tab.id
+                props.currClickedItem.id === tab.id
                   &&
                 <span className={"red-highlight"}></span>
               }
