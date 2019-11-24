@@ -1,0 +1,37 @@
+@import '../../default.scss';
+
+.info-box-container {
+  margin-bottom: 10px;
+  .info-box-label {
+    font-size: 30px;
+    color: $goalie-desc-font;
+    line-height: 30px;
+    margin-bottom: 5px;
+  }
+  .info-box-input {
+    width: 100%;
+    font-size: 20px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    border:1px solid #cccccc;
+    padding: 5px;
+    background-color: $white;
+    box-shadow: 0 0 1px 0 rgba(0,0,0,0.02), 0 1px 3px 0 rgba(50,50,93,0.15);
+    resize: none;
+
+    &.desc {
+      height: 300px;
+    }
+    &.input{
+      height: 100px;
+    }
+    &.output{
+      height: 100px;
+    }
+    &.subgoal {
+      height: 400px;
+    }
+  }
+
+  
+}

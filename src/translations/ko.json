@@ -10,5 +10,11 @@
 
   "problemTableEntry.number": "번호",
   "problemTableEntry.name": "이름",
-  "problemTableEntry.correctRate": "정답률"
+  "problemTableEntry.correctRate": "정답률",
+
+  "problemBox.description": "문제 설명",
+  "problemBox.input": "입력값",
+  "problemBox.output": "출력값",
+
+  "subgoalBox.writeDown": "문제 풀이를 자유롭게 적으세요."
 }

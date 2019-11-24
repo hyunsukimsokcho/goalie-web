@@ -10,5 +10,11 @@
 
   "problemTableEntry.number": "#",
   "problemTableEntry.name": "NAME",
-  "problemTableEntry.correctRate": "CORRECT RATE"
+  "problemTableEntry.correctRate": "CORRECT RATE",
+
+  "problemBox.description": "Description",
+  "problemBox.input": "Input",
+  "problemBox.output": "Output",
+
+  "subgoalBox.writeDown": "Write down the subgoals."
 }

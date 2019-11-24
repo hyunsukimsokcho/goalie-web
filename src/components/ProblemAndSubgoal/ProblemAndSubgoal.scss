@@ -1,0 +1,12 @@
+@import '../../default.scss';
+
+.problem-and-subgoal-container {
+  width: 1012px;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  
+  @media (max-width: $bp-laptop) {
+    width: 100%;
+  }
+}
