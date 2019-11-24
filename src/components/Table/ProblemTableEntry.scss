@@ -8,8 +8,13 @@
   padding: 20px 25px;
   box-sizing: border-box;
   color: $goalie-font;
+  border-bottom: 1px solid #E9EcEf;
+  cursor: pointer;
   @media (max-width: $bp-laptop) {
     width: 100%;
+  }
+  &:hover {
+    background-color: #FCFCFC;
   }
   &.table-header {
     height: 40px;
@@ -17,6 +22,8 @@
     background-color: #F6F9FC;
     font-size: 12px !important;
     color: #8898AA;
+    cursor: default;
+    // border-bottom: 1px solid $gray;
   }
   .problem-number {
     width: 100px;

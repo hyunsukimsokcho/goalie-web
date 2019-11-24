@@ -8,7 +8,7 @@ const ProblemTableEntry = props => {
   return (
     <div 
       className={`problem-table-entry-container ${props.isHeader ? 'table-header' : ''}`}
-      onClick={()=>props.push(`/${props.problem.id}`)}
+      onClick={props.isHeader ? null : ()=>props.push(`/${props.problem.id}`)}
     >
       <div className={'problem-number'}>
         <FormattedMessage id={props.isHeader ? 'problemTableEntry.number' : props.number} />
