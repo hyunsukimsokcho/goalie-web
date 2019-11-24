@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
 import ProblemTab from '../components/Tab/ProblemTab';
 import ProblemTable from '../components/Table/ProblemTable';
+import ProblemAndSubgoal from '../components/ProblemAndSubgoal/ProblemAndSubgoal';
 import './MainPage.scss';
 
 const MainPage = props => {
@@ -83,13 +84,7 @@ const MainPage = props => {
           />
           <Route
             path="/:probId"
-            children={ProblemAndSubgoal}
-            // render={()=>(
-            //   <div>
-            //     <ProblemBox />
-            //     <SubgoalBox isMine={true} />
-            //   </div>
-            // )}
+            children={<ProblemAndSubgoal />}
           />
         </Switch>
       </div>
