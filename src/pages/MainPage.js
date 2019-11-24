@@ -5,6 +5,11 @@ import ProblemTable from '../components/Table/ProblemTable';
 import './MainPage.scss';
 
 const MainPage = () => {
+  /** 
+   * From backend, we shall be able to fetch a collection of
+   * problems in the following order (according to 'key'): 
+   * (1) All, (2) WIP, and (3) Solved problems. Below will be deprecated.
+   * */ 
   const dummyProbListCollection = [
     [
       {
@@ -45,7 +50,6 @@ const MainPage = () => {
       }
     ]
   ];
-
   const [ currShownList, setShownList ] = useState({key: 0, id: 'problemtab.all'});
   return(
     <div className={'main-page-container'}>
