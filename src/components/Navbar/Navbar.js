@@ -1,9 +1,11 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 
 import './Navbar.scss';
 
-const Navbar = () => {
+const Navbar = props => {
   return (
     <div className={"navbar-container"}>
       <div className={"navbar-inner-container"}>
@@ -11,6 +13,7 @@ const Navbar = () => {
           className={"logo"}
           src={require('../../static/image/logo.png')}
           alt={'goalie-logo'}
+          onClick={props.pathname === '/' ? null : ()=>props.push('/')}
         />
         <div className={"main-buttons"}>
           <div className={"project-look-around"}>
@@ -34,5 +37,9 @@ const Navbar = () => {
     </div>
   );
 };
-
-export default Navbar;
+const mapStateToProps = state => ({
+  pathname: state.router.location.pathname,
+  search: state.router.location.search,
+  hash: state.router.location.hash,
+})
+export default connect(mapStateToProps, { push })(Navbar);

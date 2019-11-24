@@ -22,5 +22,4 @@ const ProblemTableEntry = props => {
     </div>
   );
 }
-// export default ProblemTableEntry;
 export default connect(null, { push })(ProblemTableEntry);
