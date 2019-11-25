@@ -32,7 +32,15 @@
         margin-left: 5px;
         cursor: pointer;
       }
+      .subgoal-card-handle {
+        height: 15px;
+        opacity: 0.4;
+        font-size: 18px;
+        line-height: 12px;
+        margin-left: 5px;
+      }
     }
+    
     .subgoal-card-textarea {
       width: 100%;
       // box-sizing: border-box;
@@ -47,4 +55,5 @@
     visibility: visible;
     opacity: 1;
   }
+  
 }

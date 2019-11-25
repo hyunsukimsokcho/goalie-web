@@ -4,10 +4,11 @@ import ItemTypes from './itemTypes';
 import './SubgoalCard.scss';
 
 const style = {
-  padding: '8px 10px',
-  backgroundColor: 'white',
+  padding: '8px 10px 8px 10px',
   cursor: 'grab',
-  width: '100%'
+  width: '100%',
+  marginLeft: '-10px',
+  zIndex: '1'
 };
 const SubgoalCard = ({ id, text, index, moveCard, addCard, deleteCard, editCard }) => {
   const ref = useRef(null);
@@ -64,6 +65,7 @@ const SubgoalCard = ({ id, text, index, moveCard, addCard, deleteCard, editCard 
             src={require('../../../static/image/plus.png')} 
             onClick={()=>addCard(index)} 
           />
+          <div className={'subgoal-card-handle'}>::</div>
         </div>
         <div ref={ref} style={{ ...style, opacity }}>
           <textarea className={'subgoal-card-textarea'} value={currText} onChange={e=>updateCard(e.target.value)}/>
