@@ -26,7 +26,7 @@ const ProblemAndSubgoal = () => {
   return (
     <div className={"problem-and-subgoal-container"}>
       <ProblemBox problem={dummyProbObj["find_average"]}/>
-      <SubgoalBox isMine={true} />
+      <SubgoalBox isMine={true} subgoal={["first", "second"]} />
     </div>
   );
 }
