@@ -7,7 +7,6 @@ import SubgoalDnD from './SubgoalDnD/SubgoalDnD';
 import './Iterator.scss';
 
 const Iterator = props => {
-  const [subgoals, setSubgoals] = useState(props.value); 
   return (
     <div className={"iterator-box-container"}>
       {props.labelId && 
@@ -15,13 +14,8 @@ const Iterator = props => {
           {msg => <div className={"iterator-box-label"}>{msg}</div>}
         </FormattedMessage>
       }
-      {/* {subgoals
-        .map((subgoal, i) => {
-          <SubgoalInput key={i} order={i} value={subgoal} onUpdate={props.setSubgoal}/>
-        })
-      } */}
       <DndProvider backend={HTML5Backend}>
-        <SubgoalDnD />
+        <SubgoalDnD subgoals={props.subgoals} setSubgoals={props.setSubgoals} />
       </DndProvider>
     </div>
   );

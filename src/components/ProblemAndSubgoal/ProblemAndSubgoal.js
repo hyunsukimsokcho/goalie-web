@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Route, Switch } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import ProblemBox from './ProblemBox';
 import SubgoalBox from './SubgoalBox';
+import SubgoalCollection from './SubgoalCollection';
 import './ProblemAndSubgoal.scss';
 
 const ProblemAndSubgoal = () => {
@@ -20,11 +22,34 @@ const ProblemAndSubgoal = () => {
 10 10 10 10`, `10`]],
     },
   }
+  const [subgoals, setSubgoals] = useState([
+    {
+      id: 1,
+      text: '',
+    }
+  ]);
   return (
-    <div className={"problem-and-subgoal-container"}>
-      <ProblemBox problem={dummyProbObj["find_average"]}/>
-      <SubgoalBox isMine={true} subgoal={["first", "second"]} />
-    </div>
+    <Switch>
+      <Route
+        exact
+        path={"/:probId"}
+        render={() => (
+          <div className={"problem-and-subgoal-container"}>
+            <ProblemBox problem={dummyProbObj["find_average"]}/>
+            <SubgoalBox isMine={true} subgoals={subgoals} setSubgoals={setSubgoals} probId={probId} />
+          </div>
+        )}
+      />
+      <Route
+        path={"/:probId/compare"}
+        render={() => (
+          <div className={"problem-and-subgoal-container"}>
+            <SubgoalBox isMine={true} isRevise={true} subgoals={subgoals} setSubgoals={setSubgoals} probId={probId} />
+            <SubgoalCollection />
+          </div>
+        )}
+      />
+    </Switch>
   );
 }
 
