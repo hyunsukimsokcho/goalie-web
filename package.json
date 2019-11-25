@@ -5,8 +5,11 @@
   "dependencies": {
     "connected-react-router": "^6.5.2",
     "history": "^4.10.1",
+    "immutability-helper": "^3.0.1",
     "node-sass": "^4.13.0",
     "react": "^16.11.0",
+    "react-dnd": "^9.5.0",
+    "react-dnd-html5-backend": "^9.5.0",
     "react-dom": "^16.11.0",
     "react-helmet": "^5.2.1",
     "react-intl": "^3.6.2",
