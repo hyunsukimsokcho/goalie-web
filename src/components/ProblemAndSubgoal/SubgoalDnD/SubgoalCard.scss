@@ -3,6 +3,7 @@
 .subgoal-card-container {
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
   .step-text {
     font-size: 20px;
     font-weight: bold;
@@ -13,7 +14,11 @@
     .subgoal-icons-only {
       display: flex;
       flex-direction: row;
-      margin-top: 10px;
+      margin-top: 12px;
+      visibility: hidden;
+      opacity: 0;
+      -webkit-transition: opacity 0.4s;
+      transition: opacity 0.4s;
       .subgoal-minus-icon {
         width: 15px;
         height: 15px;
@@ -27,6 +32,28 @@
         margin-left: 5px;
         cursor: pointer;
       }
+      .subgoal-card-handle {
+        height: 15px;
+        opacity: 0.4;
+        font-size: 18px;
+        line-height: 12px;
+        margin-left: 5px;
+      }
+    }
+    
+    .subgoal-card-textarea {
+      width: 100%;
+      // box-sizing: border-box;
+      font-size: 16px;
+      border: none;
+      background-color: $white;
+      // box-shadow: 0 0 1px 0 rgba(0,0,0,0.02), 0 1px 3px 0 rgba(50,50,93,0.15);
+      resize: none;
     }
   }
+  .subgoal-icons-container:hover > .subgoal-icons-only {
+    visibility: visible;
+    opacity: 1;
+  }
+  
 }

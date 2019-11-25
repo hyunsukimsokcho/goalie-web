@@ -19,6 +19,8 @@
   "problemBox.outputexample": "Output Example",
 
   "subgoalBox.writeDown": "Write down the subgoals.",
+
+  "subgoalDnd.minimumWarning": "At least one step is required.",
   
   "button.submit": "Submit"
 }
