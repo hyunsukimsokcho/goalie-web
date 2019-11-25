@@ -16,5 +16,7 @@
   "problemBox.input": "Input",
   "problemBox.output": "Output",
 
-  "subgoalBox.writeDown": "Write down the subgoals."
+  "subgoalBox.writeDown": "Write down the subgoals.",
+  
+  "button.submit": "Submit"
 }

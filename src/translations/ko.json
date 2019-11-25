@@ -16,5 +16,7 @@
   "problemBox.input": "입력값",
   "problemBox.output": "출력값",
 
-  "subgoalBox.writeDown": "문제 풀이를 자유롭게 적으세요."
+  "subgoalBox.writeDown": "문제 풀이를 자유롭게 적으세요.",
+
+  "button.submit": "제출하기"
 }
