@@ -7,7 +7,9 @@ const SubgoalBox = props => {
   return (
     <div className={"subgoal-box-container"}>
       <Iterator labelId={"subgoalBox.writeDown"} value={props.subgoal} />
-      <Button theme={"primary"} textId={"button.submit"}/>
+      <div className={"subgoal-submit-button-container"}>
+        <Button theme={"primary"} textId={"button.submit"}/>
+      </div>
     </div>
   )
 };

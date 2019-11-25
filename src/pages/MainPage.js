@@ -38,6 +38,30 @@ const MainPage = props => {
         id: "network-flow",
         name: "Network flow",
         corrRate: "46.53"
+      },{
+        id: "print-stars",
+        name: "Print stars",
+        corrRate: "46.53"
+      },
+      {
+        id: "find-average",
+        name: "Find average",
+        corrRate: "28.12"
+      },
+      {
+        id: "dynamic-programming",
+        name: "Dynamic Programming",
+        corrRate: "36.49"
+      },
+      {
+        id: "input-and-output",
+        name: "Input and output",
+        corrRate: "50.87"
+      },
+      {
+        id: "network-flow",
+        name: "Network flow",
+        corrRate: "46.53"
       }
     ],
     [
@@ -70,7 +94,7 @@ const MainPage = props => {
             exact 
             path="/" 
             render={()=>(
-              <div>
+              <div className={"problem-tab-and-table-container"}>
                 <ProblemTab
                   setClickedItem={setShownList} 
                   currClickedItem={currShownList}
