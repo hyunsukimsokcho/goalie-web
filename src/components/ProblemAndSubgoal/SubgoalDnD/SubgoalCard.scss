@@ -1,0 +1,32 @@
+@import '../../../default.scss';
+
+.subgoal-card-container {
+  display: flex;
+  flex-direction: column;
+  .step-text {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .subgoal-icons-container {
+    display: flex;
+    flex-direction: row;
+    .subgoal-icons-only {
+      display: flex;
+      flex-direction: row;
+      margin-top: 10px;
+      .subgoal-minus-icon {
+        width: 15px;
+        height: 15px;
+        opacity: 0.3;
+        cursor: pointer;
+      }
+      .subgoal-plus-icon {
+        width: 15px;
+        height: 15px;
+        opacity: 0.5;
+        margin-left: 5px;
+        cursor: pointer;
+      }
+    }
+  }
+}
