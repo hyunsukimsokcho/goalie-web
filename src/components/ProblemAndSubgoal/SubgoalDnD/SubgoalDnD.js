@@ -50,21 +50,27 @@ const Container = () => {
     },
     [cards],
   );
-  const addCard = useCallback((clickIndex) => {
-    const temp = cards;
+  const addCard = useCallback(clickIndex => {
     const newCard = {
-      id: globalIndex+1,
-      text: 'newCard' + globalIndex
-    }
+      id: globalIndex + 1,
+      text: ''
+    };
     setGlobalIndex(globalIndex+1);
     setCards(update(cards, {$splice: [[clickIndex+1, 0, newCard]]}));
   });
-  const deleteCard = useCallback((clickIndex) => {
+  const deleteCard = useCallback(clickIndex => {
     if (cards.length > 1) {
       setCards(update(cards, {$splice: [[clickIndex, 1]]}));
     } else {
       showToast("subgoalDnd.minimumWarning", 2000);
     }
+  });
+  const editCard = useCallback((clickId, clickIndex, newText) => {
+    const newCard = {
+      id: clickId,
+      text: newText
+    };
+    setCards(update(cards, {$splice: [[clickIndex, 1, newCard]]}));
   });
   const renderCard = (card, index) => {
     return (
@@ -76,9 +82,11 @@ const Container = () => {
         moveCard={moveCard}
         addCard={addCard}
         deleteCard={deleteCard}
+        editCard={editCard}
       />
     )
   };
+  console.log('cards', cards);
   return (
     <>
       <div className={"subgoal-dnd-conatiner"}>{cards.map((card, i) => renderCard(card, i))}</div>

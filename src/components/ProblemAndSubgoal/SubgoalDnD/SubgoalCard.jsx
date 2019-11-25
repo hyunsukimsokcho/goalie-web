@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import ItemTypes from './itemTypes';
 import './SubgoalCard.scss';
@@ -9,8 +9,8 @@ const style = {
   cursor: 'grab',
   width: '100%'
 };
-const SubgoalCard = ({ id, text, index, moveCard, addCard, deleteCard }) => {
-  const ref = useRef(null)
+const SubgoalCard = ({ id, text, index, moveCard, addCard, deleteCard, editCard }) => {
+  const ref = useRef(null);
   const [, drop] = useDrop({
     accept: ItemTypes.CARD,
     hover(item, monitor) {
@@ -35,15 +35,20 @@ const SubgoalCard = ({ id, text, index, moveCard, addCard, deleteCard }) => {
       moveCard(dragIndex, hoverIndex);
       item.index = hoverIndex;
     },
-  })
+  });
   const [{ isDragging }, drag] = useDrag({
     item: { type: ItemTypes.CARD, id, index },
     collect: monitor => ({
       isDragging: monitor.isDragging(),
     }),
-  })
-  const opacity = isDragging ? 0 : 1
-  drag(drop(ref))
+  });
+  const opacity = isDragging ? 0 : 1;
+  drag(drop(ref));
+  const [currText, setCurrText] = useState(text);
+  const updateCard = newText => {
+    setCurrText(newText);
+    editCard(id, index, newText);
+  };
   return (
     <div className={'subgoal-card-container'}>
       <div className={"step-text"}>Step {index+1}</div>
@@ -61,7 +66,7 @@ const SubgoalCard = ({ id, text, index, moveCard, addCard, deleteCard }) => {
           />
         </div>
         <div ref={ref} style={{ ...style, opacity }}>
-          {text}
+          <textarea className={'subgoal-card-textarea'} value={currText} onChange={e=>updateCard(e.target.value)}/>
         </div>
       </div>
     </div>
