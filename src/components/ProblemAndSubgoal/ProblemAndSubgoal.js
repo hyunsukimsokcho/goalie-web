@@ -11,16 +11,13 @@ const ProblemAndSubgoal = () => {
       description: 
         `Find an average of the given numbers. For example, if you have 1, 2, 3, 4, 5, then the average of the given 5 numbers is calculated as (1+2+3+4+5)/5 = 3`,
       input: 
-        `N in the first row and N numbers in the second row.
-
-[Example]
-3
-10 20 30`,
+        `N in the first row and N numbers in the second row.`,
       output: 
-        `Average of the given N numbers.
-
-[Example]
-20`
+        `Average of the given N numbers.`,
+      example:
+        [[`3
+10 20 30`, `20`],[`4
+10 10 10 10`, `10`]],
     },
   }
   return (

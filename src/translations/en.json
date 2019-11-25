@@ -15,6 +15,8 @@
   "problemBox.description": "Description",
   "problemBox.input": "Input",
   "problemBox.output": "Output",
+  "problemBox.inputexample": "Input Example",
+  "problemBox.outputexample": "Output Example",
 
   "subgoalBox.writeDown": "Write down the subgoals.",
   
