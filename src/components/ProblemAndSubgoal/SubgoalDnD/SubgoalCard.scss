@@ -3,6 +3,7 @@
 .subgoal-card-container {
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
   .step-text {
     font-size: 20px;
     font-weight: bold;
@@ -14,6 +15,10 @@
       display: flex;
       flex-direction: row;
       margin-top: 10px;
+      visibility: hidden;
+      opacity: 0;
+      -webkit-transition: opacity 0.4s;
+      transition: opacity 0.4s;
       .subgoal-minus-icon {
         width: 15px;
         height: 15px;
@@ -28,5 +33,9 @@
         cursor: pointer;
       }
     }
+  }
+  .subgoal-icons-container:hover > .subgoal-icons-only {
+    visibility: visible;
+    opacity: 1;
   }
 }

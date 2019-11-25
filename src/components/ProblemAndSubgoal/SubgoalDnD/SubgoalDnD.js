@@ -1,6 +1,7 @@
-import React, { useState, useCallback } from 'react'
-import SubgoalCard from './SubgoalCard'
-import update from 'immutability-helper'
+import React, { useState, useCallback } from 'react';
+import SubgoalCard from './SubgoalCard';
+import update from 'immutability-helper';
+import showToast from '../../Toast/Toast';
 
 const Container = () => {
   const [cards, setCards] = useState([
@@ -59,7 +60,11 @@ const Container = () => {
     setCards(update(cards, {$splice: [[clickIndex+1, 0, newCard]]}));
   });
   const deleteCard = useCallback((clickIndex) => {
-    setCards(update(cards, {$splice: [[clickIndex, 1]]}));
+    if (cards.length > 1) {
+      setCards(update(cards, {$splice: [[clickIndex, 1]]}));
+    } else {
+      showToast("subgoalDnd.minimumWarning", 2000);
+    }
   });
   const renderCard = (card, index) => {
     return (
