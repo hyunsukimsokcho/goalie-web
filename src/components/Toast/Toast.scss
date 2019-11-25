@@ -1,0 +1,47 @@
+@import '../../default.scss';
+
+.toast-container {
+  width: 0;
+  height: 0;
+  position: relative;
+  z-index: 30;
+  & > .toast {
+    // width: fit-content;
+    max-width: 480px;
+    padding: 16px 24px;
+    border-radius: 10px;
+    background: #000000;
+    font-size: 14px;
+    color: white;
+    box-sizing: border-box;
+    word-break: keep-all;
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: opacity 0.2s;
+    &.fadein {
+      opacity: 0.8;
+    }
+    &.fadeout {
+      opacity: 0;
+    }
+  }
+  &.show {
+    display: block;
+  }
+  &.hide {
+    display: none;
+  }
+  @media (max-width: $bp-mobile) {
+    & > .toast {
+      font-size: 13px;
+      padding: 8px 16px;
+    }
+  }
+  @media (max-width: 512px) {
+    & > .toast {
+      max-width: calc(100vw - 32px);
+    }
+  }
+}
