@@ -1,0 +1,58 @@
+@import '../../default.scss';
+
+.example-card-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  .step-text {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .example-icons-container {
+    display: flex;
+    flex-direction: row;
+    .example-icons-only {
+      display: flex;
+      flex-direction: row;
+      margin-top: 12px;
+      visibility: hidden;
+      opacity: 0;
+      -webkit-transition: opacity 0.4s;
+      transition: opacity 0.4s;
+      .example-minus-icon {
+        width: 15px;
+        height: 15px;
+        opacity: 0.3;
+        cursor: pointer;
+      }
+      .example-plus-icon {
+        width: 15px;
+        height: 15px;
+        opacity: 0.5;
+        margin-left: 5px;
+        cursor: pointer;
+      }
+      .example-card-handle {
+        height: 15px;
+        opacity: 0.4;
+        font-size: 18px;
+        line-height: 12px;
+        margin-left: 5px;
+      }
+    }
+    .example-card-textarea {
+      width: 100%;
+      // box-sizing: border-box;
+      font-size: 16px;
+      border: none;
+      background-color: $white;
+      // box-shadow: 0 0 1px 0 rgba(0,0,0,0.02), 0 1px 3px 0 rgba(50,50,93,0.15);
+      resize: none;
+    }
+  }
+  // .example-icons-container:hover > .example-icons-only {
+  //   visibility: visible;
+  //   opacity: 1;
+  // }
+  
+}

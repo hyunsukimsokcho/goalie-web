@@ -24,5 +24,10 @@
   
   "button.submit": "Submit",
   "button.revise": "Revise",
-  "button.moreSubgoal": "See more examples"
+  "button.moreSubgoal": "See more examples",
+
+  "exampleBox.upvoted": "Most upvoted example",
+  "exampleBox.similar": "Most similar example",
+  "exampleBox.latest": "Latest example",
+  "exampleBox.random": "Randomly chosen example"
 }

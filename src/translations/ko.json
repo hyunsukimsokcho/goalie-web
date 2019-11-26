@@ -24,5 +24,10 @@
 
   "button.submit": "제출하기",
   "button.revise": "수정하기",
-  "button.moreSubgoal": "예시 더보기"
+  "button.moreSubgoal": "예시 더보기",
+
+  "exampleBox.upvoted": "가장 칭찬받은 예시",
+  "exampleBox.similar": "가장 비슷한 예시",
+  "exampleBox.latest": "가장 최근 예시",
+  "exampleBox.random": "Randomly chosen example"
 }
