@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 import ProblemBox from './ProblemBox';
 import SubgoalBox from './SubgoalBox';
 import SubgoalCollection from './SubgoalCollection';
 import './ProblemAndSubgoal.scss';
 
-const ProblemAndSubgoal = () => {
+const ProblemAndSubgoal = props => {
   const { probId } = useParams();
   const dummyProbObj = {
     find_average: {
@@ -31,16 +33,16 @@ const ProblemAndSubgoal = () => {
   return (
     <Switch>
       <Route
-        exact
         path={"/:probId"}
         render={() => (
           <div className={"problem-and-subgoal-container"}>
-            <ProblemBox problem={dummyProbObj["find_average"]}/>
+            {props.pathname.split('/')[2] !== 'compare' && <ProblemBox problem={dummyProbObj["find_average"]}/>}
             <SubgoalBox isMine={true} subgoals={subgoals} setSubgoals={setSubgoals} probId={probId} />
+            {props.pathname.split('/')[2] === 'compare' && <SubgoalCollection />}
           </div>
         )}
       />
-      <Route
+      {/* <Route
         path={"/:probId/compare"}
         render={() => (
           <div className={"problem-and-subgoal-container"}>
@@ -48,9 +50,13 @@ const ProblemAndSubgoal = () => {
             <SubgoalCollection />
           </div>
         )}
-      />
+      /> */}
     </Switch>
   );
 }
-
-export default ProblemAndSubgoal;
+const mapStateToProps = state => ({
+  pathname: state.router.location.pathname,
+  search: state.router.location.search,
+  hash: state.router.location.hash,
+})
+export default connect(mapStateToProps, { push })(ProblemAndSubgoal);

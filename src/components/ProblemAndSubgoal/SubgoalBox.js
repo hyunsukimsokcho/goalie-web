@@ -11,7 +11,9 @@ const SubgoalBox = props => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      props.push(`/${props.probId}/compare`);
+      if (!props.isRevise) {
+        props.push(`/${props.probId}/compare`);
+      }
     }, 2000);
   }
   return (
