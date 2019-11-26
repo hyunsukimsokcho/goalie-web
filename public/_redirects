@@ -1,0 +1,7 @@
+# https://docs.netlify.com/routing/redirects/#syntax-for-the-redirects-file
+# netlify에서 react router가 하는 route를 인식하지 못해서,
+# react router가 동작하기 전까지는 페이지를 찾을 수 없다는 에러를 띄웁니다.
+
+# Redirects from what the browser requests to what we serve
+# /to                   /from
+/*                      /index.html   200
