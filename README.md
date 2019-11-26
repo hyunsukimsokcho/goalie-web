@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e160ab11-52a7-4881-95bb-e8876169d4cf/deploy-status)](https://app.netlify.com/sites/vigorous-bell-3c9911/deploys)
+
 # Goalie
 ### Powered by ReactJS and Netlify.
 
