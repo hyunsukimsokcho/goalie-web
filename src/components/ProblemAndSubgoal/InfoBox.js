@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import './InfoBox.scss';
 
@@ -19,6 +19,13 @@ const InfoBox = props => {
       type = 'subgoal'
     }
   }
+
+  useEffect(()=>{
+    var obj = document.getElementsByClassName(`info-box-input ${type}` + (props.labelId.endsWith('example')? ` ` + props.num : ``));
+    obj[0].style.height = '0px';
+    obj[0].style.height = (obj[0].scrollHeight+5)+`px`;
+  });
+
   return (
     <div className={"info-box-container"}>
       {props.labelId && 
@@ -30,7 +37,7 @@ const InfoBox = props => {
       }
       <textarea 
         readOnly={props.readOnly}
-        className={`info-box-input ${type}`}
+        className={`info-box-input ${type}` + (props.labelId.endsWith('example')? ` ` + props.num : ``)}
         value={props.value}
       />
     </div>
