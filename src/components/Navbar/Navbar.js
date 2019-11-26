@@ -2,6 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
+import showToast from '../Toast/Toast';
 
 import './Navbar.scss';
 
@@ -28,10 +29,10 @@ const Navbar = props => {
           </div>
         }
         <div className={"search-and-sub-buttons"}>
-          <div className={"signup"}>
+          <div className={"signup"} onClick={()=>showToast('toBeImplemented', 2000)}>
             <FormattedMessage id={"navbar.signup"} />
           </div>
-          <div className={"signin"}>
+          <div className={"signin"} onClick={()=>showToast('toBeImplemented', 2000)}>
             <FormattedMessage id={"navbar.signin"} />
           </div>
         </div>

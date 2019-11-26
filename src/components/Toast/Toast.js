@@ -7,7 +7,8 @@ import { getBrowserLanguageCode } from '../../utils';
 
 const Toast = () => {
   const FADE_TIME = 200;
-  const lang = getBrowserLanguageCode();
+  // const lang = getBrowserLanguageCode();
+  const lang = 'en';
   const messages = {
     ko: messages_ko,
     en: messages_en,

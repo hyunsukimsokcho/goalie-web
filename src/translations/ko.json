@@ -29,5 +29,7 @@
   "exampleBox.upvoted": "가장 칭찬받은 예시",
   "exampleBox.similar": "가장 비슷한 예시",
   "exampleBox.latest": "가장 최근 예시",
-  "exampleBox.random": "Randomly chosen example"
+  "exampleBox.random": "랜덤으로 뽑은 예시",
+
+  "toBeImplemented": "구현 예정입니다"
 }

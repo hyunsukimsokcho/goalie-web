@@ -29,5 +29,7 @@
   "exampleBox.upvoted": "Most upvoted example",
   "exampleBox.similar": "Most similar example",
   "exampleBox.latest": "Latest example",
-  "exampleBox.random": "Randomly chosen example"
+  "exampleBox.random": "Randomly chosen example",
+
+  "toBeImplemented": "Coming Soon"
 }
