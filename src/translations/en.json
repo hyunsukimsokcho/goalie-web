@@ -22,8 +22,8 @@
   "subgoalBox.revise": "Revise your subgoals.",
   "subgoalDnd.minimumWarning": "At least one step is required.",
   
-  "button.submit": "Submit",
-  "button.revise": "Revise",
+  "button.submit": "Compare with other examples and revise",
+  "button.revise": "Submit",
   "button.moreSubgoal": "See more examples",
 
   "exampleBox.upvoted": "Most upvoted example",
