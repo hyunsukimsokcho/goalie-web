@@ -27,34 +27,33 @@ const ExampleBox = props => {
       />
     )
   };
-  const selectedLabels = [ 
-    {
-      text: 'Creative', 
-      clickedNum: 4
-    },
-    {
-      text: 'Concise', 
-      clickedNum: 1
-    },
-    {
-      text: 'Helpful',
-      clickedNum: 17
-    }
-  ];
-  const notSelectedLabels = [ 
-    {
-      text: 'Unique',
-      clickedNum: 0
-    }, 
-    {
-      text: 'Documented',
-      clickedNum: 0
-    }, 
-    {
-      text: 'Fabulous',
-      clickedNum: 0
-    }
-  ];
+  const [currSelectedLabels, setCurrSelectedLabels] = useState(props.example.selectedLabels || []);
+  const [currNotSelectedLabels, setCurrNotSelectedLabels] = useState(props.example.notSelectedLabels || []);
+  const handleNewLabelClick = label => {
+    const newCurrSelectedLabels = currSelectedLabels
+    newCurrSelectedLabels.push({
+      text: label,
+      clickedNum: 1,
+      isSelected: true,
+    });
+    const newCurrNotSelectedLabels = currNotSelectedLabels.filter(labelObj => {
+      return (labelObj.text !== label);
+    });
+    setCurrSelectedLabels(newCurrSelectedLabels);
+    setCurrNotSelectedLabels(newCurrNotSelectedLabels);
+  }
+  const makeLabelDisappear = label => {
+    const newCurrNotSelectedLabels = currNotSelectedLabels
+    newCurrNotSelectedLabels.push({
+      text: label,
+      clickedNum: 0,
+    });
+    const newCurrSelectedLabels = currSelectedLabels.filter(labelObj => {
+      return (labelObj.text !== label);
+    });
+    setCurrSelectedLabels(newCurrSelectedLabels);
+    setCurrNotSelectedLabels(newCurrNotSelectedLabels);
+  }
   return (
     <div className={"example-box-container"} id={props.id}>
       <FormattedMessage id={labelId} defaultMessage={"loading"}>
@@ -65,15 +64,25 @@ const ExampleBox = props => {
       </div>
       <div className={"labels-container"}>
         {
-          props.example.selectedLabels.map(label => {
-            return (<Label text={label.text} selectable={true} clickedNum={label.clickedNum} />);
+          currSelectedLabels.map(label => {
+            return (
+              <Label 
+                text={label.text} 
+                selectable={true} 
+                clickedNum={label.clickedNum} 
+                isSelected={label.isSelected}
+                makeLabelDisappear={makeLabelDisappear}
+              />
+            );
           })
         }
-        <img
-          className={"more-label-icon"}
-          src={require('../../static/image/more_label.png')}
-          onClick={()=>openLabelModal('example-box-' + props.index, props.example.notSelectedLabels)}
-        />
+        {currNotSelectedLabels.length !== 0 &&
+          <img
+            className={"more-label-icon"}
+            src={require('../../static/image/more_label.png')}
+            onClick={()=>openLabelModal('example-box-' + props.index, currNotSelectedLabels, handleNewLabelClick)}
+          />
+        }
         </div>
     </div>
   )

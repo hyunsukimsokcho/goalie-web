@@ -5,7 +5,8 @@
   height: 20px;
   // background-color: $light-black;
   border-radius: 2px;
-  font-size: 10px;
+  font-size: 12px;
+  font-weight: bold;
   color: $black;
   opacity: 1;
   line-height: 20px;
@@ -49,5 +50,14 @@
   }
   &.helpful {
     background-color: $goalie-helpful;
+  }
+  &.unique {
+    background-color: $goalie-unique;
+  }
+  &.detailed {
+    background-color: $goalie-detailed;
+  }
+  &.optimal {
+    background-color: $goalie-optimal;
   }
 }

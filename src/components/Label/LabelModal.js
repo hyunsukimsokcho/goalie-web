@@ -13,7 +13,7 @@ const ProfileModal = props => {
         <div className={"label-select-container"}>
         {
           props.notSelectedLabels.map(label => {
-            return (<Label text={label.text} />);
+            return (<Label text={label.text} onClick={()=>props.handleOnLabelClick(label.text)} />);
           })
         }
         </div>
@@ -75,13 +75,18 @@ const ProfileModalContainer = props => {
     closeProfileModal();
   }
 
+  const handleOnLabelClickWrapper = label => {
+    props.handleOnLabelClick(label);
+    closeProfileModalWrapper();
+  }
+
   return (
     <div className={'profile-modal-container'} style={{ top: y, left: x }}>
       <div
         className={'profile-modal-background'}
         onClick={closeProfileModalWrapper}
       ></div>
-      <ProfileModal notSelectedLabels={props.labelList} />
+      <ProfileModal notSelectedLabels={props.labelList} handleOnLabelClick={handleOnLabelClickWrapper} />
     </div>
   );
 };
@@ -90,10 +95,10 @@ export const closeProfileModal = () => {
   ReactDOM.unmountComponentAtNode(container);
 };
 
-export const openLabelModal = (id, labelList) => {
+export const openLabelModal = (id, labelList, handleOnLabelClick) => {
   root.appendChild(container);
   const modalToAttach = (
-    <ProfileModalContainer id={id} labelList={labelList} />
+    <ProfileModalContainer id={id} labelList={labelList} handleOnLabelClick={handleOnLabelClick} />
   );
   ReactDOM.render(modalToAttach, container);
 };

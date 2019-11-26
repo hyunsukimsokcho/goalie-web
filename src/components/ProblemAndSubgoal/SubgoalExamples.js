@@ -8,7 +8,7 @@ const SubgoalExamples = props => {
       selectedLabels: [ 
         {
           text: 'Creative', 
-          clickedNum: 4
+          clickedNum: 4,
         },
         {
           text: 'Concise', 
