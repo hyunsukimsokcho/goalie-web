@@ -15,16 +15,18 @@ const Navbar = props => {
           alt={'goalie-logo'}
           onClick={props.pathname === '/' ? null : ()=>props.push('/')}
         />
-        <div className={"main-buttons"}>
-          <div className={"project-look-around"}>
-            <FormattedMessage id={"navbar.recommend"}>
-              {msg => <div className={'text'}>{msg}</div>}
-            </FormattedMessage>
+        {false &&
+          <div className={"main-buttons"}>
+            <div className={"project-look-around"}>
+              <FormattedMessage id={"navbar.recommend"}>
+                {msg => <div className={'text'}>{msg}</div>}
+              </FormattedMessage>
+            </div>
+            <div className={"project-start"}>
+              <FormattedMessage id={"navbar.recent"} />
+            </div>
           </div>
-          <div className={"project-start"}>
-            <FormattedMessage id={"navbar.recent"} />
-          </div>
-        </div>
+        }
         <div className={"search-and-sub-buttons"}>
           <div className={"signup"}>
             <FormattedMessage id={"navbar.signup"} />
