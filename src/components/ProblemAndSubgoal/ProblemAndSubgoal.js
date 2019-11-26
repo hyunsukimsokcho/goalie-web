@@ -36,9 +36,19 @@ const ProblemAndSubgoal = props => {
         path={"/:probId"}
         render={() => (
           <div className={"problem-and-subgoal-container"}>
-            {props.pathname.split('/')[2] !== 'compare' && <ProblemBox problem={dummyProbObj["find_average"]}/>}
-            <SubgoalBox isMine={true} isRevise={props.pathname.split('/')[2] === 'compare'} subgoals={subgoals} setSubgoals={setSubgoals} probId={probId} />
-            {props.pathname.split('/')[2] === 'compare' && <SubgoalCollection />}
+            {props.pathname.split('/')[2] !== 'compare' && 
+              <ProblemBox problem={dummyProbObj["find_average"]}/>
+            }
+            <SubgoalBox 
+              isMine={true} 
+              isRevise={props.pathname.split('/')[2] === 'compare'} 
+              subgoals={subgoals} 
+              setSubgoals={setSubgoals} 
+              probId={probId} 
+            />
+            {props.pathname.split('/')[2] === 'compare' && 
+              <SubgoalCollection />
+            }
           </div>
         )}
       />
