@@ -16,11 +16,24 @@ const SubgoalBox = props => {
       }
     }, 2000);
   }
+  const checkVoidSubgoal = subgoal => {
+    let isFilled = true;
+    subgoal.map(s => {
+      isFilled = isFilled && !s.text;
+    })
+    return isFilled;
+  }
   return (
     <div className={"subgoal-box-container"}>
       <Iterator labelId={props.isRevise ? "subgoalBox.revise" : "subgoalBox.writeDown"} subgoals={props.subgoals} setSubgoals={props.setSubgoals} />
       <div className={"subgoal-submit-button-container"}>
-        <Button theme={"primary"} textId={props.isRevise ? "button.revise" : "button.submit"} onClick={handleButtonClick} isLoading={isLoading} />
+        <Button 
+          theme={"primary"} 
+          textId={props.isRevise ? "button.revise" : "button.submit"} 
+          onClick={handleButtonClick}
+          isDisabled={checkVoidSubgoal(props.subgoals)}
+          isLoading={isLoading} 
+        />
       </div>
     </div>
   )
