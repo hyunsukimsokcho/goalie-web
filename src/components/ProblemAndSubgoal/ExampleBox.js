@@ -43,7 +43,7 @@ const ExampleBox = props => {
   ];
   const notSelectedLabels = [ 
     {
-      text: 'Hmm',
+      text: 'Unique',
       clickedNum: 0
     }, 
     {
@@ -61,18 +61,18 @@ const ExampleBox = props => {
         {msg => <div className={"example-box-label"}>{msg}</div>}
       </FormattedMessage>
       <div className={"example-contents-container"}>
-        {props.example.map((text, i) => renderExampleCard(text, i))}
+        {props.example.subgoal.map((text, i) => renderExampleCard(text, i))}
       </div>
       <div className={"labels-container"}>
         {
-          selectedLabels.map(label => {
+          props.example.selectedLabels.map(label => {
             return (<Label text={label.text} selectable={true} clickedNum={label.clickedNum} />);
           })
         }
         <img
           className={"more-label-icon"}
           src={require('../../static/image/more_label.png')}
-          onClick={()=>openLabelModal('example-box-' + props.index, notSelectedLabels)}
+          onClick={()=>openLabelModal('example-box-' + props.index, props.example.notSelectedLabels)}
         />
         </div>
     </div>

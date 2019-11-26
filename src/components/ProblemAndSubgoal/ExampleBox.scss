@@ -28,6 +28,7 @@
       opacity: 0;
       -webkit-transition: opacity 0.4s;
       transition: opacity 0.4s;
+      cursor: pointer;
       &:active {
         visibility: visible;
       }
