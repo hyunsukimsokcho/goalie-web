@@ -1,7 +1,7 @@
 # Goalie
 ### Powered by ReactJS and Netlify.
 
-Main javascript file is located under ```src``` directory with the name of ```index.js```. Basically, we followed component-oriented development according to ReactJS's main concept. Those components can be found under ```src/components```.
+Main javascript file is located under ```src``` directory with the name of ```index.js```. Basically, we followed component-oriented development according to ReactJS's main concept. Those components can be found under ```src/components```. Labelling feature can be found under ```Label``` directory, and writing/revising feature under ```ProblemAndSubgoal``` directory.
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
