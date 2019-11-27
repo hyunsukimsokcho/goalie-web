@@ -43,15 +43,13 @@
     
     .subgoal-card-textarea {
       width: 100%;
-      // box-sizing: border-box;
       font-size: 16px;
       border: none;
       background-color: $white;
-      // box-shadow: 0 0 1px 0 rgba(0,0,0,0.02), 0 1px 3px 0 rgba(50,50,93,0.15);
       resize: none;      
     }
     .subgoal-card-textarea::placeholder {
-      color: $dark-gray;
+      color: $gray;
     }
   }
   .subgoal-icons-container:hover > .subgoal-icons-only {
