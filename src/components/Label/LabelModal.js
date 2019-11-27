@@ -41,6 +41,9 @@ const ProfileModalContainer = props => {
     profileElement.style.visibility = "visible";
     setX(profileElement.getBoundingClientRect()['x'] + 2);
     let obj = document.getElementsByClassName('profile-modal-container')[0];
+    console.log('window.innerWidth', window.innerWidth);
+    console.log('window.innerHeight', window.innerHeight);
+    
     setY(profileElement.getBoundingClientRect()['y'] - obj.scrollHeight);
   }, [width]);
 
