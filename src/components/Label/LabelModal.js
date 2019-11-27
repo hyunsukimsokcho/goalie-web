@@ -37,11 +37,19 @@ const ProfileModalContainer = props => {
       .getElementById(props.id)
       .getElementsByClassName('more-label-icon')[0];
     setImgElem(profileElement);
-    profileElement.style.opacity = "1";
+    profileElement.style.opacity = "0.6";
     profileElement.style.visibility = "visible";
-    setX(profileElement.getBoundingClientRect()['x'] + 2);
     let obj = document.getElementsByClassName('profile-modal-container')[0];
-    setY(profileElement.getBoundingClientRect()['y'] - obj.scrollHeight);
+    if (profileElement.getBoundingClientRect()['x'] + obj.scrollWidth > window.innerWidth) {
+      setX(profileElement.getBoundingClientRect()['x'] + profileElement.clientWidth - obj.scrollWidth - 2);
+    } else {
+      setX(profileElement.getBoundingClientRect()['x'] + 2);
+    }
+    if (profileElement.getBoundingClientRect()['y'] - obj.scrollHeight < 66.5) {
+      setY(profileElement.getBoundingClientRect()['y'] + profileElement.clientHeight - 2);
+    } else {
+      setY(profileElement.getBoundingClientRect()['y'] - obj.scrollHeight);
+    }
   }, [width]);
 
   useEffect(() => {
