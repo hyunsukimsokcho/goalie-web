@@ -37,22 +37,19 @@ const ProfileModalContainer = props => {
       .getElementById(props.id)
       .getElementsByClassName('more-label-icon')[0];
     setImgElem(profileElement);
-    profileElement.style.opacity = "1";
+    profileElement.style.opacity = "0.6";
     profileElement.style.visibility = "visible";
     let obj = document.getElementsByClassName('profile-modal-container')[0];
-    console.log('window.innerWidth', window.innerWidth);
-    console.log('window.innerHeight', window.innerHeight);
-    console.log('x', profileElement.getBoundingClientRect()['x']);
-    console.log('y', profileElement.getBoundingClientRect()['y']);
-    console.log('modalWidth', obj.scrollWidth);
-    console.log('modalHeight', obj.scrollHeight);
-    console.log('========================');
     if (profileElement.getBoundingClientRect()['x'] + obj.scrollWidth > window.innerWidth) {
-      setX(profileElement.getBoundingClientRect()['x'] + profileElement.clientWidth - obj.scrollWidth);
+      setX(profileElement.getBoundingClientRect()['x'] + profileElement.clientWidth - obj.scrollWidth - 2);
     } else {
       setX(profileElement.getBoundingClientRect()['x'] + 2);
     }
-    setY(profileElement.getBoundingClientRect()['y'] - obj.scrollHeight);
+    if (profileElement.getBoundingClientRect()['y'] - obj.scrollHeight < 66.5) {
+      setY(profileElement.getBoundingClientRect()['y'] + profileElement.clientHeight - 2);
+    } else {
+      setY(profileElement.getBoundingClientRect()['y'] - obj.scrollHeight);
+    }
   }, [width]);
 
   useEffect(() => {
