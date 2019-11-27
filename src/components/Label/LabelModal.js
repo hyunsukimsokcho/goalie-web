@@ -39,11 +39,19 @@ const ProfileModalContainer = props => {
     setImgElem(profileElement);
     profileElement.style.opacity = "1";
     profileElement.style.visibility = "visible";
-    setX(profileElement.getBoundingClientRect()['x'] + 2);
     let obj = document.getElementsByClassName('profile-modal-container')[0];
     console.log('window.innerWidth', window.innerWidth);
     console.log('window.innerHeight', window.innerHeight);
-    
+    console.log('x', profileElement.getBoundingClientRect()['x']);
+    console.log('y', profileElement.getBoundingClientRect()['y']);
+    console.log('modalWidth', obj.scrollWidth);
+    console.log('modalHeight', obj.scrollHeight);
+    console.log('========================');
+    if (profileElement.getBoundingClientRect()['x'] + obj.scrollWidth > window.innerWidth) {
+      setX(profileElement.getBoundingClientRect()['x'] + profileElement.clientWidth - obj.scrollWidth);
+    } else {
+      setX(profileElement.getBoundingClientRect()['x'] + 2);
+    }
     setY(profileElement.getBoundingClientRect()['y'] - obj.scrollHeight);
   }, [width]);
 
