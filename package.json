@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "connected-react-router": "^6.5.2",
+    "firebase": "^7.5.0",
     "history": "^4.10.1",
     "immutability-helper": "^3.0.1",
     "node-sass": "^4.13.0",

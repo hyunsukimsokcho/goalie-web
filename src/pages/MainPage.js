@@ -5,6 +5,7 @@ import ProblemTab from '../components/Tab/ProblemTab';
 import ProblemTable from '../components/Table/ProblemTable';
 import ProblemAndSubgoal from '../components/ProblemAndSubgoal/ProblemAndSubgoal';
 import './MainPage.scss';
+import firebase, { auth } from '../firebase';
 
 const MainPage = props => {
   /** 
@@ -85,6 +86,8 @@ const MainPage = props => {
     ]
   ];
   const [ currShownList, setShownList ] = useState({key: 0, id: 'problemtab.all'});
+  console.log('firebase', firebase);
+  console.log('firebase.auth()', auth);
   return(
     <div className={'main-page-container'}>
       <Navbar />
