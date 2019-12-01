@@ -1,3 +1,5 @@
+import showToast from './components/Toast/Toast';
+
 export const getBrowserLanguageCode = () => {
   return navigator.language.substr(0, 2);
 };
@@ -21,4 +23,27 @@ export const metaTagContents = {
     ko: '문제별 코드 디자인 공유 플랫폼 골리',
     en: 'Goalie, code design sharing platform',
   },
+};
+export const verifyError = async err => {
+  let description = '';
+  switch (err.code) {
+    case 'auth/network-request-failed':
+      description = 'signin.error.networkError';
+      break;
+    case 'auth/too-many-requests':
+      description = 'total.alert.serverError';
+      break;
+    case 'auth/popup-blocked':
+      description = 'total.alert.serverError';
+      break;
+    case 'auth/popup-closed-by-user':
+      break;
+    case undefined:
+      break;
+    default:
+      alert(err.code);
+      break;
+  }
+  description && showToast(description, 2000);
+  return;
 };
