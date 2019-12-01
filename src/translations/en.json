@@ -3,6 +3,8 @@
   "navbar.signup": "Sign up",
   "navbar.recommend": "Today's problem",
   "navbar.recent": "Go last problem",
+  "navbar.signout": "Sign out",
+  "navbar.welcome": "Account: ",
 
   "problemtab.all": "All",
   "problemtab.wip": "In progress",
@@ -31,5 +33,7 @@
   "exampleBox.latest": "Latest example",
   "exampleBox.random": "Randomly chosen example",
 
-  "toBeImplemented": "Coming Soon"
+  "toast.toBeImplemented": "Coming Soon",
+  "toast.welcome": "Welcome,",
+  "toast.pleaseSignin": "Please sign in, to share code design with others."
 }

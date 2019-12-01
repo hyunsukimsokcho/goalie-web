@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
+
 import Navbar from '../components/Navbar/Navbar';
 import ProblemTab from '../components/Tab/ProblemTab';
 import ProblemTable from '../components/Table/ProblemTable';
 import ProblemAndSubgoal from '../components/ProblemAndSubgoal/ProblemAndSubgoal';
 import './MainPage.scss';
 import firebase, { auth } from '../firebase';
+import { verifyError } from '../utils';
+import Dimmer from '../components/Dimmer/Dimmer';
+import Loading from '../components/Loading/Loading';
+import showToast from '../components/Toast/Toast';
 
 const MainPage = props => {
   /** 
@@ -86,11 +93,52 @@ const MainPage = props => {
     ]
   ];
   const [ currShownList, setShownList ] = useState({key: 0, id: 'problemtab.all'});
-  console.log('firebase', firebase);
-  console.log('firebase.auth()', auth);
+  const [ isLoading, setIsLoading ] = useState(true);
+  const [ isAuthenticated, setIsAuthenticated] = useState(false);
+  const [ account, setAccount ] = useState('');
+  const signInWithGoogle = async () => {
+    setIsLoading(true);
+    var provider = new firebase.auth.GoogleAuthProvider();
+    try {
+      await firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(async userCredential => {
+        const { user } = userCredential;
+      });
+    } catch (error) {
+      verifyError(error);
+    }
+    setIsLoading(false);
+  };
+  const signOut = () => {
+    auth
+      .signOut()
+      .then(res => {
+        props.push('/');
+        setIsAuthenticated(false);
+      });
+  }
+  useEffect(() => {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        setIsAuthenticated(true);
+        setAccount(user.email);
+        showToast("toast.welcome", 2000, user.email);
+      } else {
+        setIsAuthenticated(false);
+        showToast("toast.pleaseSignin", 2000);
+      }
+      setIsLoading(false);
+    })
+  }, [isAuthenticated]);
   return(
     <div className={'main-page-container'}>
-      <Navbar />
+      <Dimmer active={isLoading} />
+      {isLoading && 
+        <Loading />
+      }
+      <Navbar signInWithGoogle={signInWithGoogle} isLoading={isLoading} isAuthenticated={isAuthenticated} signOut={signOut} account={account} />
       <div className={'main-content-container'}>
         <Switch>
           <Route
@@ -118,4 +166,9 @@ const MainPage = props => {
     </div>
   );
 }
-export default MainPage;
+const mapStateToProps = state => ({
+  pathname: state.router.location.pathname,
+  search: state.router.location.search,
+  hash: state.router.location.hash,
+})
+export default connect(mapStateToProps, { push })(MainPage);

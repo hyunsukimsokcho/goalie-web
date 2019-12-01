@@ -1,0 +1,12 @@
+@import '../../default.scss';
+
+.dimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 101;
+  height: 100%;
+  background: $black;
+  opacity: 0.6;
+}
