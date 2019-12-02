@@ -9,19 +9,19 @@ import SubgoalCollection from './SubgoalCollection';
 import './ProblemAndSubgoal.scss';
 
 const ProblemAndSubgoal = props => {
+  console.log('problemListCollection', props.problemListCollection);
   const { probId } = useParams();
   const dummyProbObj = {
     find_average: {
       description: 
-        `Find an average of the given numbers. For example, if you have 1, 2, 3, 4, 5, then the average of the given 5 numbers is calculated as (1+2+3+4+5)/5 = 3`,
+        `404 NOT FOUND.
+Please check network connections..`,
       input: 
-        `N in the first row and N numbers in the second row.`,
+        ``,
       output: 
-        `Average of the given N numbers.`,
+        ``,
       example:
-        [[`3
-10 20 30`, `20`],[`4
-10 10 10 10`, `10`]],
+        [],
     },
   }
   const [subgoals, setSubgoals] = useState([

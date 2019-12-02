@@ -48,6 +48,79 @@ export const verifyError = async err => {
   return;
 };
 
+export const dummyProbListCollection = [
+  [
+    {
+      id: "print-stars",
+      title: "Print stars",
+      corrRate: "46.53"
+    },
+    {
+      id: "find-average",
+      title: "Find average",
+      corrRate: "28.12"
+    },
+    {
+      id: "dynamic-programming",
+      title: "Dynamic Programming",
+      corrRate: "36.49"
+    },
+    {
+      id: "input-and-output",
+      title: "Input and output",
+      corrRate: "50.87"
+    },
+    {
+      id: "network-flow",
+      title: "Network flow",
+      corrRate: "46.53"
+    },{
+      id: "print-stars",
+      title: "Print stars",
+      corrRate: "46.53"
+    },
+    {
+      id: "find-average",
+      title: "Find average",
+      corrRate: "28.12"
+    },
+    {
+      id: "dynamic-programming",
+      title: "Dynamic Programming",
+      corrRate: "36.49"
+    },
+    {
+      id: "input-and-output",
+      title: "Input and output",
+      corrRate: "50.87"
+    },
+    {
+      id: "network-flow",
+      title: "Network flow",
+      corrRate: "46.53"
+    }
+  ],
+  [
+    {
+      id: "find-average",
+      title: "Find average",
+      corrRate: "28.12"
+    }
+  ],
+  [
+    {
+      id: "print-stars",
+      title: "Print stars",
+      corrRate: "46.53"
+    },
+    {
+      id: "dynamic-programming",
+      title: "Dynamic Programming",
+      corrRate: "36.49"
+    },
+  ]
+];
+
 export const getJsonFromUrl = url => {
   if(!url) url = window.location.search;
   var query = url.substr(1);

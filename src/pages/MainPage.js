@@ -9,7 +9,7 @@ import ProblemTable from '../components/Table/ProblemTable';
 import ProblemAndSubgoal from '../components/ProblemAndSubgoal/ProblemAndSubgoal';
 import './MainPage.scss';
 import firebase, { auth } from '../firebase';
-import { verifyError, getJsonFromUrl } from '../utils';
+import { verifyError, getJsonFromUrl, dummyProbListCollection } from '../utils';
 import Dimmer from '../components/Dimmer/Dimmer';
 import Loading from '../components/Loading/Loading';
 import showToast from '../components/Toast/Toast';
@@ -25,78 +25,6 @@ const MainPage = props => {
    * problems in the following order (according to 'key'): 
    * (1) All, (2) WIP, and (3) Solved problems. Below will be deprecated.
    * */ 
-  const dummyProbListCollection = [
-    [
-      {
-        id: "print-stars",
-        title: "Print stars",
-        corrRate: "46.53"
-      },
-      {
-        id: "find-average",
-        title: "Find average",
-        corrRate: "28.12"
-      },
-      {
-        id: "dynamic-programming",
-        title: "Dynamic Programming",
-        corrRate: "36.49"
-      },
-      {
-        id: "input-and-output",
-        title: "Input and output",
-        corrRate: "50.87"
-      },
-      {
-        id: "network-flow",
-        title: "Network flow",
-        corrRate: "46.53"
-      },{
-        id: "print-stars",
-        title: "Print stars",
-        corrRate: "46.53"
-      },
-      {
-        id: "find-average",
-        title: "Find average",
-        corrRate: "28.12"
-      },
-      {
-        id: "dynamic-programming",
-        title: "Dynamic Programming",
-        corrRate: "36.49"
-      },
-      {
-        id: "input-and-output",
-        title: "Input and output",
-        corrRate: "50.87"
-      },
-      {
-        id: "network-flow",
-        title: "Network flow",
-        corrRate: "46.53"
-      }
-    ],
-    [
-      {
-        id: "find-average",
-        title: "Find average",
-        corrRate: "28.12"
-      }
-    ],
-    [
-      {
-        id: "print-stars",
-        title: "Print stars",
-        corrRate: "46.53"
-      },
-      {
-        id: "dynamic-programming",
-        title: "Dynamic Programming",
-        corrRate: "36.49"
-      },
-    ]
-  ];
   const [ problemListCollection, setProblemListCollection ] = useState(dummyProbListCollection);
   const [ currShownList, setShownList ] = useState({key: 0, id: 'problemtab.all'});
   const [ isLoading, setIsLoading ] = useState(true);
@@ -189,7 +117,7 @@ const MainPage = props => {
             />
             <Route
               path="/:probId"
-              children={isAuthenticated ? <ProblemAndSubgoal /> : <RedirectWithToast />}
+              children={isAuthenticated ? <ProblemAndSubgoal problemListCollection={problemListCollection} /> : <RedirectWithToast />}
             />
           </Switch>
         </div>
