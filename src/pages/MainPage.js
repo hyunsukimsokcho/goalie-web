@@ -9,7 +9,7 @@ import ProblemTable from '../components/Table/ProblemTable';
 import ProblemAndSubgoal from '../components/ProblemAndSubgoal/ProblemAndSubgoal';
 import './MainPage.scss';
 import firebase, { auth } from '../firebase';
-import { verifyError, getJsonFromUrl, dummyProbListCollection } from '../utils';
+import { verifyError, getJsonFromUrl, dummyProbListCollection, probObj404 } from '../utils';
 import Dimmer from '../components/Dimmer/Dimmer';
 import Loading from '../components/Loading/Loading';
 import showToast from '../components/Toast/Toast';
@@ -26,6 +26,7 @@ const MainPage = props => {
    * (1) All, (2) WIP, and (3) Solved problems. Below will be deprecated.
    * */ 
   const [ problemListCollection, setProblemListCollection ] = useState(dummyProbListCollection);
+  const [ problem, setProblem ] = useState(probObj404);
   const [ currShownList, setShownList ] = useState({key: 0, id: 'problemtab.all'});
   const [ isLoading, setIsLoading ] = useState(true);
   const [ isProblemSetLoading, setIsProblemSetLoading ] = useState(true);
@@ -56,6 +57,8 @@ const MainPage = props => {
       });
   }
   useEffect(() => {
+    // (1) GET problem lists from DB.
+    // (2) If 'meta' exists in url, fetch the problem data.
     auth.onAuthStateChanged(async user => {
       await firebase
         .firestore()
@@ -65,11 +68,16 @@ const MainPage = props => {
           const temp = dummyProbListCollection;
           temp[0] = snapshot.docs.map(doc => doc.data());
           setProblemListCollection(temp);
+          const meta = props.pathname.split('/')[1];
+          if (meta) {
+            setProblem(temp[0].filter(problem => problem.meta === meta)[0]);
+          }
         });
       setIsProblemSetLoading(false);
     });
-  }, []);
+  }, [isAuthenticated]);
   useEffect(() => {
+    // Checks if signed in.
     auth.onAuthStateChanged(user => {
       if (user) {
         setIsAuthenticated(true);
@@ -95,10 +103,11 @@ const MainPage = props => {
           <ProblemTable
             problemListCollection={problemListCollection} 
             currShownList={currShownList}
+            setProblem={setProblem}
           />
         </div>
       );
-  }
+    }
   }
   return (
     <div className={'main-page-container'}>
@@ -117,7 +126,7 @@ const MainPage = props => {
             />
             <Route
               path="/:probId"
-              children={isAuthenticated ? <ProblemAndSubgoal problemListCollection={problemListCollection} /> : <RedirectWithToast />}
+              children={isAuthenticated ? <ProblemAndSubgoal problem={problem} /> : <RedirectWithToast />}
             />
           </Switch>
         </div>

@@ -9,21 +9,8 @@ import SubgoalCollection from './SubgoalCollection';
 import './ProblemAndSubgoal.scss';
 
 const ProblemAndSubgoal = props => {
-  console.log('problemListCollection', props.problemListCollection);
+  console.log('problemListCollection', props.problem);
   const { probId } = useParams();
-  const dummyProbObj = {
-    find_average: {
-      description: 
-        `404 NOT FOUND.
-Please check network connections..`,
-      input: 
-        ``,
-      output: 
-        ``,
-      example:
-        [],
-    },
-  }
   const [subgoals, setSubgoals] = useState([
     {
       id: 1,
@@ -37,7 +24,7 @@ Please check network connections..`,
         render={() => (
           <div className={"problem-and-subgoal-container"}>
             {props.pathname.split('/')[2] !== 'compare' && 
-              <ProblemBox problem={dummyProbObj["find_average"]}/>
+              <ProblemBox problem={props.problem}/>
             }
             <SubgoalBox 
               isMine={true} 

@@ -120,6 +120,16 @@ export const dummyProbListCollection = [
     },
   ]
 ];
+export const probObj404 = {
+  description: 
+    `404 NOT FOUND`,
+  input: 
+    `Please check your network connections.`,
+  output: 
+    `Otherwise, please go back to main page and retry.`,
+  examples:
+    [],
+}
 
 export const getJsonFromUrl = url => {
   if(!url) url = window.location.search;

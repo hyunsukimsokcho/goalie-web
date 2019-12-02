@@ -8,16 +8,26 @@ const ProblemTableEntry = props => {
   return (
     <div 
       className={`problem-table-entry-container ${props.isHeader ? 'table-header' : ''}`}
-      onClick={props.isHeader ? null : ()=>props.push(`/${props.problem.meta}`)}
+      onClick={props.isHeader ? null : ()=>{props.push(`/${props.problem.meta}`); props.setProblem(props.problem)}}
     >
       <div className={'problem-number'}>
-        <FormattedMessage id={props.isHeader ? 'problemTableEntry.number' : props.number} />
+        {props.isHeader
+          ? <FormattedMessage id={'problemTableEntry.number'} />
+          : <div>{props.number}</div>
+        }
       </div>
       <div className={'problem-name'}>
-        <FormattedMessage id={props.isHeader ? 'problemTableEntry.name' : props.problem.title} />
+        {props.isHeader
+          ? <FormattedMessage id={'problemTableEntry.name'} />
+          : <div>{props.problem.title}</div>
+        }
+        
       </div>
       <div className={'problem-correct-rate'}>
-        <FormattedMessage id={props.isHeader ? 'problemTableEntry.correctRate' : props.problem.corrRate + '%'} />
+        {props.isHeader
+          ? <FormattedMessage id={'problemTableEntry.correctRate'} />
+          : <div>{props.problem.corrRate + '%'}</div>
+        }
       </div>
     </div>
   );

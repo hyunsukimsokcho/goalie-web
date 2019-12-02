@@ -8,7 +8,7 @@ const ProblemTable = props => {
       <ProblemTableEntry isHeader={true} />
       {
         props.problemListCollection[props.currShownList.key].map((problem, i) => {
-          return (<ProblemTableEntry key={i+1} number={i+1} problem={problem} />);
+          return (<ProblemTableEntry key={i+1} number={i+1} problem={problem} setProblem={props.setProblem} />);
         })
       }
     </div>
