@@ -84,7 +84,8 @@ const MainPage = props => {
   useEffect(() => {
     const meta = props.pathname.split('/')[1];
     auth.onAuthStateChanged(async user => {
-      await firebase
+      if (user) {
+        await firebase
         .firestore()
         .collection('subgoals')
         .get()
@@ -100,7 +101,8 @@ const MainPage = props => {
           } else {
             setSubgoal(defaultSubgoal);
           }
-        })
+        });
+      }
     })
   }, [problem]);
   useEffect(() => {
