@@ -29,76 +29,78 @@ const MainPage = props => {
     [
       {
         id: "print-stars",
-        name: "Print stars",
+        title: "Print stars",
         corrRate: "46.53"
       },
       {
         id: "find-average",
-        name: "Find average",
+        title: "Find average",
         corrRate: "28.12"
       },
       {
         id: "dynamic-programming",
-        name: "Dynamic Programming",
+        title: "Dynamic Programming",
         corrRate: "36.49"
       },
       {
         id: "input-and-output",
-        name: "Input and output",
+        title: "Input and output",
         corrRate: "50.87"
       },
       {
         id: "network-flow",
-        name: "Network flow",
+        title: "Network flow",
         corrRate: "46.53"
       },{
         id: "print-stars",
-        name: "Print stars",
+        title: "Print stars",
         corrRate: "46.53"
       },
       {
         id: "find-average",
-        name: "Find average",
+        title: "Find average",
         corrRate: "28.12"
       },
       {
         id: "dynamic-programming",
-        name: "Dynamic Programming",
+        title: "Dynamic Programming",
         corrRate: "36.49"
       },
       {
         id: "input-and-output",
-        name: "Input and output",
+        title: "Input and output",
         corrRate: "50.87"
       },
       {
         id: "network-flow",
-        name: "Network flow",
+        title: "Network flow",
         corrRate: "46.53"
       }
     ],
     [
       {
         id: "find-average",
-        name: "Find average",
+        title: "Find average",
         corrRate: "28.12"
       }
     ],
     [
       {
         id: "print-stars",
-        name: "Print stars",
+        title: "Print stars",
         corrRate: "46.53"
       },
       {
         id: "dynamic-programming",
-        name: "Dynamic Programming",
+        title: "Dynamic Programming",
         corrRate: "36.49"
       },
     ]
   ];
+  const [ problemListCollection, setProblemListCollection ] = useState(dummyProbListCollection);
   const [ currShownList, setShownList ] = useState({key: 0, id: 'problemtab.all'});
   const [ isLoading, setIsLoading ] = useState(true);
+  const [ isProblemSetLoading, setIsProblemSetLoading ] = useState(true);
   const [ isAuthenticated, setIsAuthenticated] = useState(false);
   const [ account, setAccount ] = useState('');
   const next = getJsonFromUrl().next;
@@ -126,6 +128,20 @@ const MainPage = props => {
       });
   }
   useEffect(() => {
+    auth.onAuthStateChanged(async user => {
+      await firebase
+        .firestore()
+        .collection('problems')
+        .get()
+        .then(snapshot => {
+          const temp = dummyProbListCollection;
+          temp[0] = snapshot.docs.map(doc => doc.data());
+          setProblemListCollection(temp);
+        });
+      setIsProblemSetLoading(false);
+    });
+  }, []);
+  useEffect(() => {
     auth.onAuthStateChanged(user => {
       if (user) {
         setIsAuthenticated(true);
@@ -138,7 +154,7 @@ const MainPage = props => {
       setIsLoading(false);
     })
   }, [isAuthenticated]);
-  const renderNext = (isAuthenticated, next) => {
+  const renderNext = (isAuthenticated, next, problemListCollection) => {
     if( isAuthenticated && next ) { 
       return () => props.push(next);
     } else {
@@ -149,7 +165,7 @@ const MainPage = props => {
             currClickedItem={currShownList}
           />
           <ProblemTable
-            problemListCollection={dummyProbListCollection} 
+            problemListCollection={problemListCollection} 
             currShownList={currShownList}
           />
         </div>
@@ -158,24 +174,26 @@ const MainPage = props => {
   }
   return (
     <div className={'main-page-container'}>
-      <Dimmer active={isLoading} />
-      {isLoading && 
+      <Dimmer active={isProblemSetLoading || isLoading} />
+      {(isProblemSetLoading || isLoading) && 
         <Loading />
       }
       <Navbar signInWithGoogle={signInWithGoogle} isLoading={isLoading} isAuthenticated={isAuthenticated} signOut={signOut} account={account} />
-      <div className={'main-content-container'}>
-        <Switch>
-          <Route
-            exact 
-            path="/" 
-            render={renderNext(isAuthenticated, next)}
-          />
-          <Route
-            path="/:probId"
-            children={isAuthenticated ? <ProblemAndSubgoal /> : <RedirectWithToast />}
-          />
-        </Switch>
-      </div>
+      {!isProblemSetLoading &&
+        <div className={'main-content-container'}>
+          <Switch>
+            <Route
+              exact 
+              path="/" 
+              render={renderNext(isAuthenticated, next, problemListCollection)}
+            />
+            <Route
+              path="/:probId"
+              children={isAuthenticated ? <ProblemAndSubgoal /> : <RedirectWithToast />}
+            />
+          </Switch>
+        </div>
+      }
     </div>
   );
 }

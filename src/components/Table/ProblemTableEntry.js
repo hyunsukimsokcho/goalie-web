@@ -8,13 +8,13 @@ const ProblemTableEntry = props => {
   return (
     <div 
       className={`problem-table-entry-container ${props.isHeader ? 'table-header' : ''}`}
-      onClick={props.isHeader ? null : ()=>props.push(`/${props.problem.id}`)}
+      onClick={props.isHeader ? null : ()=>props.push(`/${props.problem.meta}`)}
     >
       <div className={'problem-number'}>
         <FormattedMessage id={props.isHeader ? 'problemTableEntry.number' : props.number} />
       </div>
       <div className={'problem-name'}>
-        <FormattedMessage id={props.isHeader ? 'problemTableEntry.name' : props.problem.name} />
+        <FormattedMessage id={props.isHeader ? 'problemTableEntry.name' : props.problem.title} />
       </div>
       <div className={'problem-correct-rate'}>
         <FormattedMessage id={props.isHeader ? 'problemTableEntry.correctRate' : props.problem.corrRate + '%'} />
