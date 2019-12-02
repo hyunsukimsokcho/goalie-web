@@ -47,3 +47,14 @@ export const verifyError = async err => {
   description && showToast(description, 2000);
   return;
 };
+
+export const getJsonFromUrl = url => {
+  if(!url) url = window.location.search;
+  var query = url.substr(1);
+  var result = {};
+  query.split("&").forEach(function(part) {
+    var item = part.split("=");
+    result[item[0]] = decodeURIComponent(item[1]);
+  });
+  return result;
+}

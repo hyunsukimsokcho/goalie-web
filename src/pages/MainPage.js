@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 
@@ -9,10 +9,15 @@ import ProblemTable from '../components/Table/ProblemTable';
 import ProblemAndSubgoal from '../components/ProblemAndSubgoal/ProblemAndSubgoal';
 import './MainPage.scss';
 import firebase, { auth } from '../firebase';
-import { verifyError } from '../utils';
+import { verifyError, getJsonFromUrl } from '../utils';
 import Dimmer from '../components/Dimmer/Dimmer';
 import Loading from '../components/Loading/Loading';
 import showToast from '../components/Toast/Toast';
+
+const RedirectWithToast = () => {
+  showToast("toast.pleaseSignin", 2000);
+  return <Redirect to={`?next=${window.location.pathname}`} />;
+}
 
 const MainPage = props => {
   /** 
@@ -96,6 +101,7 @@ const MainPage = props => {
   const [ isLoading, setIsLoading ] = useState(true);
   const [ isAuthenticated, setIsAuthenticated] = useState(false);
   const [ account, setAccount ] = useState('');
+  const next = getJsonFromUrl().next;
   const signInWithGoogle = async () => {
     setIsLoading(true);
     var provider = new firebase.auth.GoogleAuthProvider();
@@ -132,7 +138,25 @@ const MainPage = props => {
       setIsLoading(false);
     })
   }, [isAuthenticated]);
-  return(
+  const renderNext = (isAuthenticated, next) => {
+    if( isAuthenticated && next ) { 
+      return () => props.push(next);
+    } else {
+      return () => (
+        <div className={"problem-tab-and-table-container"}>
+          <ProblemTab
+            setClickedItem={setShownList} 
+            currClickedItem={currShownList}
+          />
+          <ProblemTable
+            problemListCollection={dummyProbListCollection} 
+            currShownList={currShownList}
+          />
+        </div>
+      );
+  }
+  }
+  return (
     <div className={'main-page-container'}>
       <Dimmer active={isLoading} />
       {isLoading && 
@@ -144,22 +168,11 @@ const MainPage = props => {
           <Route
             exact 
             path="/" 
-            render={()=>(
-              <div className={"problem-tab-and-table-container"}>
-                <ProblemTab
-                  setClickedItem={setShownList} 
-                  currClickedItem={currShownList}
-                />
-                <ProblemTable
-                  problemListCollection={dummyProbListCollection} 
-                  currShownList={currShownList}
-                />
-              </div>
-            )}
+            render={renderNext(isAuthenticated, next)}
           />
           <Route
             path="/:probId"
-            children={<ProblemAndSubgoal />}
+            children={isAuthenticated ? <ProblemAndSubgoal /> : <RedirectWithToast />}
           />
         </Switch>
       </div>
