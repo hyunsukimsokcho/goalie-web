@@ -15,7 +15,7 @@ const Iterator = props => {
         </FormattedMessage>
       }
       <DndProvider backend={HTML5Backend}>
-        <SubgoalDnD subgoals={props.subgoals} setSubgoals={props.setSubgoals} />
+        <SubgoalDnD subgoal={props.subgoal} setSubgoal={props.setSubgoal} />
       </DndProvider>
     </div>
   );

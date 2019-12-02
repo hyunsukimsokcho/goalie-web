@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import ItemTypes from './itemTypes';
 import './SubgoalCard.scss';
@@ -11,6 +11,10 @@ const style = {
   zIndex: '1'
 };
 const SubgoalCard = ({ id, text, index, moveCard, addCard, deleteCard, editCard }) => {
+  const [currText, setCurrText] = useState(text);
+  useEffect(() => {
+    setCurrText(text);
+  }, [text]);
   const ref = useRef(null);
   const [, drop] = useDrop({
     accept: ItemTypes.CARD,
@@ -45,7 +49,6 @@ const SubgoalCard = ({ id, text, index, moveCard, addCard, deleteCard, editCard 
   });
   const opacity = isDragging ? 0 : 1;
   drag(drop(ref));
-  const [currText, setCurrText] = useState(text);
   const updateCard = newText => {
     setCurrText(newText);
     editCard(id, index, newText);

@@ -1,15 +1,15 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import SubgoalCard from './SubgoalCard';
 import update from 'immutability-helper';
 import showToast from '../../Toast/Toast';
 
 const SubgoalDnD = props => {
-  const [globalIndex, setGlobalIndex] = useState(props.subgoals.length);
+  const [globalIndex, setGlobalIndex] = useState(props.subgoal.length);
   const moveCard = useCallback(
     (dragIndex, hoverIndex) => {
-      const dragCard = props.subgoals[dragIndex]
-      props.setSubgoals(
-        update(props.subgoals, {
+      const dragCard = props.subgoal[dragIndex]
+      props.setSubgoal(
+        update(props.subgoal, {
           $splice: [
             [dragIndex, 1],
             [hoverIndex, 0, dragCard],
@@ -17,7 +17,7 @@ const SubgoalDnD = props => {
         }),
       )
     },
-    [props.subgoals],
+    [props.subgoal],
   );
   const addCard = useCallback(clickIndex => {
     const newCard = {
@@ -25,11 +25,11 @@ const SubgoalDnD = props => {
       text: ''
     };
     setGlobalIndex(globalIndex+1);
-    props.setSubgoals(update(props.subgoals, {$splice: [[clickIndex+1, 0, newCard]]}));
+    props.setSubgoal(update(props.subgoal, {$splice: [[clickIndex+1, 0, newCard]]}));
   });
   const deleteCard = useCallback(clickIndex => {
-    if (props.subgoals.length > 1) {
-      props.setSubgoals(update(props.subgoals, {$splice: [[clickIndex, 1]]}));
+    if (props.subgoal.length > 1) {
+      props.setSubgoal(update(props.subgoal, {$splice: [[clickIndex, 1]]}));
     } else {
       showToast("subgoalDnd.minimumWarning", 2000);
     }
@@ -39,7 +39,7 @@ const SubgoalDnD = props => {
       id: clickId,
       text: newText
     };
-    props.setSubgoals(update(props.subgoals, {$splice: [[clickIndex, 1, newCard]]}));
+    props.setSubgoal(update(props.subgoal, {$splice: [[clickIndex, 1, newCard]]}));
   });
   const renderCard = (card, index) => {
     return (
@@ -57,7 +57,7 @@ const SubgoalDnD = props => {
   };
   return (
     <>
-      <div className={"subgoal-dnd-conatiner"}>{props.subgoals.map((card, i) => renderCard(card, i))}</div>
+      <div className={"subgoal-dnd-conatiner"}>{props.subgoal.map((card, i) => renderCard(card, i))}</div>
     </>
   )
 };

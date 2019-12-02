@@ -9,14 +9,7 @@ import SubgoalCollection from './SubgoalCollection';
 import './ProblemAndSubgoal.scss';
 
 const ProblemAndSubgoal = props => {
-  console.log('problemListCollection', props.problem);
   const { probId } = useParams();
-  const [subgoals, setSubgoals] = useState([
-    {
-      id: 1,
-      text: '',
-    }
-  ]);
   return (
     <Switch>
       <Route
@@ -29,9 +22,9 @@ const ProblemAndSubgoal = props => {
             <SubgoalBox 
               isMine={true} 
               isRevise={props.pathname.split('/')[2] === 'compare'} 
-              subgoals={subgoals} 
-              setSubgoals={setSubgoals} 
-              probId={probId} 
+              subgoal={props.subgoal} 
+              setSubgoal={props.setSubgoal} 
+              probId={probId}
             />
             {props.pathname.split('/')[2] === 'compare' && 
               <SubgoalCollection />

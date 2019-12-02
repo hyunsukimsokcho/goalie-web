@@ -130,7 +130,12 @@ export const probObj404 = {
   examples:
     [],
 }
-
+export const defaultSubgoal = [
+  {
+    id: 1,
+    text: '',
+  }
+]
 export const getJsonFromUrl = url => {
   if(!url) url = window.location.search;
   var query = url.substr(1);

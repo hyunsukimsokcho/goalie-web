@@ -7,14 +7,15 @@ import { push } from 'connected-react-router';
 
 const SubgoalBox = props => {
   const [isLoading, setIsLoading] = useState(false);
-  const handleButtonClick = () => {
+  const submitSubgoal = () => {
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      if (!props.isRevise) {
-        props.push(`/${props.probId}/compare`);
-      }
-    }, 2000);
+
+    // setTimeout(() => {
+    //   setIsLoading(false);
+    //   if (!props.isRevise) {
+    //     props.push(`/${props.probId}/compare`);
+    //   }
+    // }, 2000);
   }
   const checkVoidSubgoal = subgoal => {
     let isFilled = true;
@@ -23,15 +24,16 @@ const SubgoalBox = props => {
     })
     return isFilled;
   }
+
   return (
     <div className={"subgoal-box-container"}>
-      <Iterator labelId={props.isRevise ? "subgoalBox.revise" : "subgoalBox.writeDown"} subgoals={props.subgoals} setSubgoals={props.setSubgoals} />
+      <Iterator labelId={props.isRevise ? "subgoalBox.revise" : "subgoalBox.writeDown"} subgoal={props.subgoal} setSubgoal={props.setSubgoal} />
       <div className={"subgoal-submit-button-container"}>
         <Button 
           theme={"primary"} 
           textId={props.isRevise ? "button.revise" : "button.submit"} 
-          onClick={handleButtonClick}
-          isDisabled={checkVoidSubgoal(props.subgoals)}
+          onClick={submitSubgoal}
+          isDisabled={checkVoidSubgoal(props.subgoal)}
           isLoading={isLoading} 
         />
       </div>
