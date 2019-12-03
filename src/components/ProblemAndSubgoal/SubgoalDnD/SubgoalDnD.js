@@ -5,6 +5,9 @@ import showToast from '../../Toast/Toast';
 
 const SubgoalDnD = props => {
   const [globalIndex, setGlobalIndex] = useState(props.subgoal.length);
+  useEffect(() => {
+    setGlobalIndex(props.subgoal.length);
+  }, [props.subgoal]);
   const moveCard = useCallback(
     (dragIndex, hoverIndex) => {
       const dragCard = props.subgoal[dragIndex]

@@ -24,7 +24,7 @@ const ProblemAndSubgoal = props => {
               isRevise={props.pathname.split('/')[2] === 'compare'} 
               subgoal={props.subgoal} 
               setSubgoal={props.setSubgoal} 
-              probId={probId}
+              problem={props.problem}
             />
             {props.pathname.split('/')[2] === 'compare' && 
               <SubgoalCollection />

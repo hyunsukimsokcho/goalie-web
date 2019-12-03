@@ -12,4 +12,5 @@ export const auth = firebase.auth();
 auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);  // Auto-login for default (o.w. SESSION)
 
 export const database = firebase.database();
+export const connectedRef = firebase.database().ref(".info/connected");
 export default firebase;
