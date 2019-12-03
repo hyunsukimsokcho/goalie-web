@@ -11,9 +11,9 @@ const style = {
   marginLeft: '-10px',
   zIndex: '1'
 };
-const SubgoalCard = ({ id, text, index, moveCard, addCard, deleteCard, editCard }) => {
+const SubgoalCard = ({ id, text, index, moveCard, addCard, deleteCard, editCard, isNew }) => {
   const [currText, setCurrText] = useState(text);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(isNew);
   useEffect(() => {
     setCurrText(text);
     setTimeout(() => {
@@ -58,7 +58,6 @@ const SubgoalCard = ({ id, text, index, moveCard, addCard, deleteCard, editCard 
     setCurrText(newText);
     editCard(id, index, newText);
   };
-  console.log('isLoaded', isLoaded);
   return (
     <div className={'subgoal-card-container'}>
       {!isLoaded

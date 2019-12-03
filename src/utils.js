@@ -146,3 +146,7 @@ export const getJsonFromUrl = url => {
   });
   return result;
 }
+export const submitStatus = {
+  wip: "WIP",
+  done: "DONE"
+}

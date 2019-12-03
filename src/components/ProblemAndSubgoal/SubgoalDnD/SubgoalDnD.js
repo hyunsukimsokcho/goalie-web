@@ -25,7 +25,8 @@ const SubgoalDnD = props => {
   const addCard = useCallback(clickIndex => {
     const newCard = {
       id: globalIndex + 1,
-      text: ''
+      text: '',
+      isNew: true
     };
     setGlobalIndex(globalIndex+1);
     props.setSubgoal(update(props.subgoal, {$splice: [[clickIndex+1, 0, newCard]]}));
@@ -55,6 +56,7 @@ const SubgoalDnD = props => {
         addCard={addCard}
         deleteCard={deleteCard}
         editCard={editCard}
+        isNew={card.isNew}
       />
     )
   };

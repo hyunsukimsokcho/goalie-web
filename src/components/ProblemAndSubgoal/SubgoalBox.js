@@ -5,28 +5,39 @@ import Button from '../Button/Button';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import firebase, { auth } from '../../firebase';
+import { submitStatus } from '../../utils';
 
 const SubgoalBox = props => {
   const [isLoading, setIsLoading] = useState(false);
   const submitSubgoal = () => {
     setIsLoading(true);
     auth.onAuthStateChanged(async user => {
-      await firebase
-        .firestore()
-        .collection("subgoals")
-        .doc(props.problem.meta)
-        .set({
-          [user.uid]: props.subgoal
-        })
-        .then(function() {
-          if (!props.isRevise) {
+      if (user) {
+        await firebase
+          .firestore()
+          .collection("subgoals")
+          .doc(props.problem.meta)
+          .update({
+            [user.uid]: props.subgoal
+          })
+          .then(async () => {
+            await firebase
+              .firestore()
+              .collection("users")
+              .doc(user.uid)
+              .update({
+                [props.problem.meta]: props.isRevise ? submitStatus.done : submitStatus.wip
+              }).then(() => {
+                if (!props.isRevise) {
+                  setIsLoading(false);
+                  props.push(`/${props.problem.meta}/compare`);
+                }
+              })
+          })
+          .finally(() => {
             setIsLoading(false);
-            props.push(`/${props.probId}/compare`);
-          }
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
+          });
+      }
     })
   }
   const checkVoidSubgoal = subgoal => {

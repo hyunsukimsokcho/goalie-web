@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import update from 'immutability-helper';
 
 import Navbar from '../components/Navbar/Navbar';
 import ProblemTab from '../components/Tab/ProblemTab';
@@ -47,6 +46,22 @@ const MainPage = props => {
       .signInWithPopup(provider)
       .then(async userCredential => {
         const { user } = userCredential;
+        await firebase
+          .firestore()
+          .collection('users')
+          .where('email', '==', user.email)
+          .get()
+          .then(async snapshot => {
+            if (snapshot.empty) {
+              await firebase
+                .firestore()
+                .collection('users')
+                .doc(user.uid)
+                .set({
+                  email: user.email
+                });
+            }
+          })
       });
     } catch (error) {
       verifyError(error);
@@ -90,10 +105,10 @@ const MainPage = props => {
         .collection('subgoals')
         .get()
         .then(snapshot => {
-          const subgoalsofProblem = snapshot.docs.filter(doc => {return (doc.id == meta)});
-          if (subgoalsofProblem.length !== 0) {
-            const subgoal = subgoalsofProblem[0].data()[user.uid];
-            if (subgoal.length !== 0) {
+          const subgoalsOfProblem = snapshot.docs.filter(doc => {return (doc.id == meta)});
+          if (subgoalsOfProblem.length !== 0) {
+            const subgoal = subgoalsOfProblem[0].data()[user.uid];
+            if (subgoal && subgoal.length !== 0) {
               setSubgoal(subgoal);
             } else {
               setSubgoal(defaultSubgoal);
