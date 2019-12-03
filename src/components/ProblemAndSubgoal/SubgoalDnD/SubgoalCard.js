@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
+import Skeleton from 'react-skeleton-loader';
 import ItemTypes from './itemTypes';
 import './SubgoalCard.scss';
 
@@ -12,8 +13,12 @@ const style = {
 };
 const SubgoalCard = ({ id, text, index, moveCard, addCard, deleteCard, editCard }) => {
   const [currText, setCurrText] = useState(text);
+  const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     setCurrText(text);
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 1000);
   }, [text]);
   const ref = useRef(null);
   const [, drop] = useDrop({
@@ -53,31 +58,37 @@ const SubgoalCard = ({ id, text, index, moveCard, addCard, deleteCard, editCard 
     setCurrText(newText);
     editCard(id, index, newText);
   };
+  console.log('isLoaded', isLoaded);
   return (
     <div className={'subgoal-card-container'}>
-      <div className={"step-text"}>Step {index+1}</div>
-      <div className={"subgoal-icons-container"}>
-        <div className={"subgoal-icons-only"}>
-          <img 
-            className={"subgoal-minus-icon"}
-            src={require('../../../static/image/minus.png')} 
-            onClick={()=>deleteCard(index)}
-          />
-          <img 
-            className={"subgoal-plus-icon"}
-            src={require('../../../static/image/plus.png')} 
-            onClick={()=>addCard(index)} 
-          />
-          <div className={'subgoal-card-handle'}>::</div>
-        </div>
-        <div ref={ref} style={{ ...style, opacity }}>
-          <textarea 
-            placeholder={index === 0 ? 'e.g. Initialize integer variable count and sum to 0.' : 'Write here'}
-            className={'subgoal-card-textarea'} 
-            value={currText} 
-            onChange={e=>updateCard(e.target.value)}/>
-        </div>
-      </div>
+      {!isLoaded
+        ? <div className={"skeleton-container"}><Skeleton width={'100%'}/></div>
+        : <div>
+            <div className={"step-text"}>Step {index+1}</div>
+            <div className={"subgoal-icons-container"}>
+              <div className={"subgoal-icons-only"}>
+                <img 
+                  className={"subgoal-minus-icon"}
+                  src={require('../../../static/image/minus.png')} 
+                  onClick={()=>deleteCard(index)}
+                />
+                <img 
+                  className={"subgoal-plus-icon"}
+                  src={require('../../../static/image/plus.png')} 
+                  onClick={()=>addCard(index)} 
+                />
+                <div className={'subgoal-card-handle'}>::</div>
+              </div>
+              <div ref={ref} style={{ ...style, opacity }}>
+                <textarea 
+                  placeholder={index === 0 ? 'e.g. Initialize integer variable count and sum to 0.' : 'Write here'}
+                  className={'subgoal-card-textarea'} 
+                  value={currText} 
+                  onChange={e=>updateCard(e.target.value)}/>
+              </div>
+            </div>
+          </div>
+      }
     </div>
   )
 }
