@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import similarity from 'string-cosine-similarity';
+import stringSimilarity from 'string-similarity';
 
 import ExampleBox from './ExampleBox';
 import firebase from '../../firebase';
@@ -137,7 +137,7 @@ const SubgoalExamples = props => {
     ]
   };
   const computeSim = (str1, str2) => {
-    return similarity(str1, str2);
+    return stringSimilarity(str1, str2);
   }
   useEffect(() => {
     // (1) GET subgoal collections from DB.
