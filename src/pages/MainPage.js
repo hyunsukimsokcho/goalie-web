@@ -72,7 +72,7 @@ const MainPage = props => {
     auth
       .signOut()
       .then(res => {
-        props.push('/');
+        window.location = '/';
         setIsAuthenticated(false);
       });
   }
@@ -102,12 +102,16 @@ const MainPage = props => {
       if (user) {
         await firebase
         .firestore()
-        .collection('subgoals')
+        .collection('users')
+        .where('email', '==', user.email)
         .get()
         .then(snapshot => {
-          const subgoalsOfProblem = snapshot.docs.filter(doc => {return (doc.id == meta)});
-          if (subgoalsOfProblem.length !== 0) {
-            const subgoal = subgoalsOfProblem[0].data()[user.uid];
+          // console.log('snap', snapshot);
+          // console.log('data', snapshot.docs[0].data());
+          // const subgoalsOfProblem = snapshot.docs[.filter(doc => {return (doc.id == meta)})];
+          const subgoalOfUser = snapshot.docs.length !== 0 && snapshot.docs[0].data() && snapshot.docs[0].data()[meta];
+          if (subgoalOfUser) {
+            const subgoal = subgoalOfUser.subgoal;
             if (subgoal && subgoal.length !== 0) {
               setSubgoal(subgoal);
             } else {

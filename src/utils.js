@@ -150,3 +150,38 @@ export const submitStatus = {
   wip: "WIP",
   done: "DONE"
 }
+export const freshLabels = [
+  {
+    text: 'Creative', 
+    clickedNum: 0
+  },
+  {
+    text: 'Unique',
+    clickedNum: 0
+  }, 
+  {
+    text: 'Detailed',
+    clickedNum: 0
+  }, 
+  {
+    text: 'Optimal',
+    clickedNum: 0
+  },
+  {
+    text: 'Helpful',
+    clickedNum: 0
+  },
+  {
+    text: 'Concise',
+    clickedNum: 0
+  }
+];
+export const makeId = length => {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}

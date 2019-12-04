@@ -5,7 +5,8 @@ import Button from '../Button/Button';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import firebase, { auth } from '../../firebase';
-import { submitStatus } from '../../utils';
+import { submitStatus, makeId, freshLabels } from '../../utils';
+import showToast from '../Toast/Toast';
 
 const SubgoalBox = props => {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,28 +16,40 @@ const SubgoalBox = props => {
       if (user) {
         await firebase
           .firestore()
-          .collection("subgoals")
-          .doc(props.problem.meta)
+          .collection("users")
+          .doc(user.uid)
           .update({
-            [user.uid]: props.subgoal
-          })
-          .then(async () => {
-            await firebase
-              .firestore()
-              .collection("users")
-              .doc(user.uid)
-              .update({
-                [props.problem.meta]: props.isRevise ? submitStatus.done : submitStatus.wip
-              }).then(() => {
-                if (!props.isRevise) {
+            [props.problem.meta]: {
+              status: props.isRevise ? submitStatus.done : submitStatus.wip,
+              subgoal: props.subgoal
+            }
+          }).then(async () => {
+            if (!props.isRevise) {
+              setIsLoading(false);
+              props.push(`/${props.problem.meta}/compare`);
+            } else {
+              const newId = makeId(29);
+              await firebase
+                .firestore()
+                .collection("subgoals")
+                .doc(props.problem.meta)
+                .update({
+                  [newId]: {
+                    content: props.subgoal,
+                    email: user.email,
+                    uid: user.uid,
+                    labels: freshLabels,
+                    timestamp: Date.now()
+                  }
+                })
+                .then(async () => {
+                  showToast("toast.submitted", 2000);
+                })
+                .finally(() => {
                   setIsLoading(false);
-                  props.push(`/${props.problem.meta}/compare`);
-                }
-              })
+                });
+            }
           })
-          .finally(() => {
-            setIsLoading(false);
-          });
       }
     })
   }
