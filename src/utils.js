@@ -129,13 +129,23 @@ export const probObj404 = {
     `Otherwise, please go back to main page and retry.`,
   examples:
     [],
-}
+};
 export const defaultSubgoal = [
   {
     id: 1,
     text: '',
   }
-]
+];
+export const concatSubgoal = (subgoal) => {
+  let concatenated = '';
+  subgoal.map(s => {
+    if (s.text) {
+      concatenated += " ";
+    }
+    concatenated += s.text;
+  });
+  return concatenated.trim();
+}
 export const getJsonFromUrl = url => {
   if(!url) url = window.location.search;
   var query = url.substr(1);
