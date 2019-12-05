@@ -27,7 +27,7 @@ const ProblemAndSubgoal = props => {
               problem={props.problem}
             />
             {props.pathname.split('/')[2] === 'compare' && 
-              <SubgoalCollection />
+              <SubgoalCollection subgoal={props.subgoal} />
             }
           </div>
         )}

@@ -27,8 +27,8 @@ const ExampleBox = props => {
       />
     )
   };
-  const [currSelectedLabels, setCurrSelectedLabels] = useState(props.example.selectedLabels || []);
-  const [currNotSelectedLabels, setCurrNotSelectedLabels] = useState(props.example.notSelectedLabels || []);
+  const [currSelectedLabels, setCurrSelectedLabels] = useState(props.pseudoexample.selectedLabels || []);
+  const [currNotSelectedLabels, setCurrNotSelectedLabels] = useState(props.pseudoexample.notSelectedLabels || []);
   const handleNewLabelClick = label => {
     const newCurrSelectedLabels = currSelectedLabels
     newCurrSelectedLabels.push({
@@ -60,13 +60,14 @@ const ExampleBox = props => {
         {msg => <div className={"example-box-label"}>{msg}</div>}
       </FormattedMessage>
       <div className={"example-contents-container"}>
-        {props.example.subgoal.map((text, i) => renderExampleCard(text, i))}
+        {props.example && props.example.content.map((step, i) => renderExampleCard(step.text, i))}
       </div>
       <div className={"labels-container"}>
         {
           currSelectedLabels.map(label => {
             return (
               <Label 
+                key={label.text}
                 text={label.text} 
                 selectable={true} 
                 clickedNum={label.clickedNum} 

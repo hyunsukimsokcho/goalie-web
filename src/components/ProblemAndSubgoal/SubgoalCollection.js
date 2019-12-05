@@ -17,7 +17,7 @@ const SubgoalCollection = props => {
   }
   return (
     <div className={"subgoal-collection-container"}>
-      <SubgoalExamples moreSubgoal={moreSubgoal} />
+      <SubgoalExamples moreSubgoal={moreSubgoal} subgoal={props.subgoal} />
       <div className={"subgoal-see-more-button-container"}>
         <Button theme={"black"} textId={"button.moreSubgoal"} isLoading={isLoading} onClick={handleButtonClick} isDisabled={isDisabled} />
       </div>
