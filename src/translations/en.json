@@ -37,5 +37,6 @@
   "toast.toBeImplemented": "Coming Soon",
   "toast.welcome": "Welcome,",
   "toast.pleaseSignin": "Please sign in, to share code design with others.",
-  "toast.submitted": "Submitted"
+  "toast.submitted": "Submitted",
+  "toast.saved": "Saved"
 }

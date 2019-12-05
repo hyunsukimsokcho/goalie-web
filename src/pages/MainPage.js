@@ -38,6 +38,9 @@ const MainPage = props => {
   const [ account, setAccount ] = useState('');
   const [ uid, setUid ] = useState('');
   const [ userInfo, setUserInfo ] = useState();
+  const [ numAllUsers, setNumAllUsers] = useState(1);
+  const [ subgoalSubmissionNum, setSubgoalSubmissionNum ] = useState({});
+  const [ isStatLoading, setIsStatLoading ] = useState(true);
   const next = getJsonFromUrl().next;
   const signInWithGoogle = async () => {
     setIsLoading(true);
@@ -110,10 +113,6 @@ const MainPage = props => {
         .where('email', '==', user.email)
         .get()
         .then(snapshot => {
-          // console.log('s', snapshot.docs[0].data());
-          // console.log('snap', snapshot);
-          // console.log('data', snapshot.docs[0].data());
-          // const subgoalsOfProblem = snapshot.docs[.filter(doc => {return (doc.id == meta)})];
           if (snapshot.docs.length !== 0 && snapshot.docs[0].data()) {
             setUserInfo(snapshot.docs[0].data());
           }
@@ -165,6 +164,9 @@ const MainPage = props => {
             problemListCollection={problemListCollection} 
             currShownList={currShownList}
             setProblem={setProblem}
+            subgoalSubmissionNum={subgoalSubmissionNum}
+            numAllUsers={numAllUsers}
+            setIsStatLoading={setIsStatLoading}
           />
         </div>
       );
@@ -172,8 +174,8 @@ const MainPage = props => {
   }
   return (
     <div className={'main-page-container'}>
-      <Dimmer active={isProblemSetLoading || isLoading} />
-      {(isProblemSetLoading || isLoading) && 
+      <Dimmer active={isProblemSetLoading || isLoading || isStatLoading} />
+      {(isProblemSetLoading || isLoading || isStatLoading) && 
         <Loading />
       }
       <Navbar signInWithGoogle={signInWithGoogle} isLoading={isLoading} isAuthenticated={isAuthenticated} signOut={signOut} account={account} />
@@ -187,7 +189,7 @@ const MainPage = props => {
             />
             <Route
               path="/:probId"
-              children={isAuthenticated ? <ProblemAndSubgoal problem={problem} subgoal={subgoal} setSubgoal={setSubgoal} uid={uid} isSubmitted={isSubmitted} /> : <RedirectWithToast />}
+              children={isAuthenticated ? <ProblemAndSubgoal problem={problem} subgoal={subgoal} setSubgoal={setSubgoal} uid={uid} isSubmitted={isSubmitted} setIsStatLoading={setIsStatLoading} /> : <RedirectWithToast />}
             />
           </Switch>
         </div>

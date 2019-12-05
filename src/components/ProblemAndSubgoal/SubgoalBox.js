@@ -25,6 +25,7 @@ const SubgoalBox = props => {
             }
           }).then(async () => {
             if (!props.isRevise) {
+              showToast("toast.saved", 2000);
               setIsLoading(false);
               props.push(`/${props.problem.meta}/compare`);
             } else {
@@ -44,6 +45,7 @@ const SubgoalBox = props => {
                 })
                 .then(async () => {
                   showToast("toast.submitted", 2000);
+                  props.push('/');
                 })
                 .finally(() => {
                   setIsLoading(false);

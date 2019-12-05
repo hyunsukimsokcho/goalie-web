@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -10,6 +10,9 @@ import './ProblemAndSubgoal.scss';
 
 const ProblemAndSubgoal = props => {
   const { probId } = useParams();
+  // useEffect(() => {
+  //   props.setIsStatLoading(false);
+  // }, []);
   return (
     <Switch>
       <Route

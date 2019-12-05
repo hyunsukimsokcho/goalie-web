@@ -32,7 +32,7 @@ const ProblemTableEntry = props => {
       <div className={'problem-correct-rate'}>
         {props.isHeader
           ? <FormattedMessage id={'problemTableEntry.correctRate'} />
-          : <div>{props.problem.corrRate + '%'}</div>
+          : <div>{(props.submissionRate * 100).toFixed(2) + '%'}</div>
         }
       </div>
     </div>
