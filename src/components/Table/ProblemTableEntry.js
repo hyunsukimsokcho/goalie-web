@@ -5,10 +5,16 @@ import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 
 const ProblemTableEntry = props => {
+  const goToProblem = () => {
+    props.push(`/${props.problem.meta}`);
+    if (props.problem) {
+      props.setProblem(props.problem);
+    }
+  }
   return (
     <div 
       className={`problem-table-entry-container ${props.isHeader ? 'table-header' : ''}`}
-      onClick={props.isHeader ? null : ()=>{props.push(`/${props.problem.meta}`); props.setProblem(props.problem)}}
+      onClick={props.isHeader ? null : ()=>goToProblem()}
     >
       <div className={'problem-number'}>
         {props.isHeader

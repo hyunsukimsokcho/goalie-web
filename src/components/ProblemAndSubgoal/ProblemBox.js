@@ -3,6 +3,7 @@ import './ProblemBox.scss';
 import InfoBox from './InfoBox';
 
 const ProblemBox = props => {
+  console.log('a', props.problem);
   return (
     <div className={"problem-box-container"}>
       <InfoBox readOnly={true} labelId={"problemBox.description"} value={props.problem.description.replace(/\\n/g, '\n')} />

@@ -3,6 +3,7 @@ import ProblemTableEntry from './ProblemTableEntry';
 import './ProblemTable.scss';
 
 const ProblemTable = props => {
+  console.log('p', props.problemListCollection);
   return (
     <div className={'problem-table-container'}>
       <ProblemTableEntry isHeader={true} />

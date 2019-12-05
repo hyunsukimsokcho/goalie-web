@@ -60,7 +60,9 @@ const SubgoalBox = props => {
     })
     return isFilled;
   }
-
+  const checkValidProblem = () => {
+    return !(props.problem && props.problem.meta);
+  }
   return (
     <div className={"subgoal-box-container"}>
       <Iterator labelId={props.isRevise ? "subgoalBox.revise" : "subgoalBox.writeDown"} subgoal={props.subgoal} setSubgoal={props.setSubgoal} />
@@ -69,7 +71,7 @@ const SubgoalBox = props => {
           theme={"primary"} 
           textId={props.isRevise ? (props.isSubmitted? "button.alreadySubmitted" : "button.revise") : "button.submit"} 
           onClick={submitSubgoal}
-          isDisabled={checkVoidSubgoal(props.subgoal) || (props.isSubmitted && props.isRevise)}
+          isDisabled={checkValidProblem() || checkVoidSubgoal(props.subgoal) || (props.isSubmitted && props.isRevise)}
           isLoading={isLoading}
         />
       </div>

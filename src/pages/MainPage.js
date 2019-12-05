@@ -37,6 +37,7 @@ const MainPage = props => {
   const [ isAuthenticated, setIsAuthenticated] = useState(false);
   const [ account, setAccount ] = useState('');
   const [ uid, setUid ] = useState('');
+  const [ userInfo, setUserInfo ] = useState();
   const next = getJsonFromUrl().next;
   const signInWithGoogle = async () => {
     setIsLoading(true);
@@ -91,7 +92,9 @@ const MainPage = props => {
           temp[0] = snapshot.docs.map(doc => doc.data());
           setProblemListCollection(temp);
           if (meta) {
-            setProblem(temp[0].filter(problem => problem.meta === meta)[0]);
+            if (temp[0].filter(problem => problem.meta === meta)[0]) {
+              setProblem(temp[0].filter(problem => problem.meta === meta)[0]);
+            }
           }
         });
       setIsProblemSetLoading(false);
@@ -111,6 +114,9 @@ const MainPage = props => {
           // console.log('snap', snapshot);
           // console.log('data', snapshot.docs[0].data());
           // const subgoalsOfProblem = snapshot.docs[.filter(doc => {return (doc.id == meta)})];
+          if (snapshot.docs.length !== 0 && snapshot.docs[0].data()) {
+            setUserInfo(snapshot.docs[0].data());
+          }
           const subgoalOfUser = snapshot.docs.length !== 0 && snapshot.docs[0].data() && snapshot.docs[0].data()[meta];
           if (subgoalOfUser) {
             const subgoal = subgoalOfUser.subgoal;
