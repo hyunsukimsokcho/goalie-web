@@ -20,7 +20,7 @@ const SubgoalBox = props => {
           .doc(user.uid)
           .update({
             [props.problem.meta]: {
-              status: props.isRevise ? submitStatus.done : submitStatus.wip,
+              status: props.isRevise ? submitStatus.done : (props.isSubmitted ? submitStatus.done : submitStatus.wip),
               subgoal: props.subgoal
             }
           }).then(async () => {
@@ -67,10 +67,10 @@ const SubgoalBox = props => {
       <div className={"subgoal-submit-button-container"}>
         <Button 
           theme={"primary"} 
-          textId={props.isRevise ? "button.revise" : "button.submit"} 
+          textId={props.isRevise ? (props.isSubmitted? "button.alreadySubmitted" : "button.revise") : "button.submit"} 
           onClick={submitSubgoal}
-          isDisabled={checkVoidSubgoal(props.subgoal)}
-          isLoading={isLoading} 
+          isDisabled={checkVoidSubgoal(props.subgoal) || (props.isSubmitted && props.isRevise)}
+          isLoading={isLoading}
         />
       </div>
     </div>

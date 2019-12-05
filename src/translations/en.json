@@ -12,7 +12,7 @@
 
   "problemTableEntry.number": "#",
   "problemTableEntry.name": "NAME",
-  "problemTableEntry.correctRate": "CORRECT RATE",
+  "problemTableEntry.correctRate": "SUBMISSION RATE",
 
   "problemBox.description": "Description",
   "problemBox.input": "Input",
@@ -22,9 +22,10 @@
 
   "subgoalBox.writeDown": "Write down the subgoals.",
   "subgoalBox.revise": "Revise your subgoals.",
+  "button.alreadySubmitted": "Already submitted",
   "subgoalDnd.minimumWarning": "At least one step is required.",
   
-  "button.submit": "Compare with other examples and revise",
+  "button.submit": "Save and Compare with other examples and revise",
   "button.revise": "Submit",
   "button.moreSubgoal": "See more examples",
 

@@ -7,7 +7,7 @@ const ProblemTab = props => {
   const tabList = [
     {key: 0, id: 'problemtab.all'},
     {key: 1, id: 'problemtab.wip'},
-    // {key: 2, id: 'problemtab.solved'}
+    {key: 2, id: 'problemtab.solved'}
   ];
   return (
     <div className={"problem-tab-container"}>

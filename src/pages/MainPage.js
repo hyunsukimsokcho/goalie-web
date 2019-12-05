@@ -9,7 +9,7 @@ import ProblemTable from '../components/Table/ProblemTable';
 import ProblemAndSubgoal from '../components/ProblemAndSubgoal/ProblemAndSubgoal';
 import './MainPage.scss';
 import firebase, { auth } from '../firebase';
-import { verifyError, getJsonFromUrl, dummyProbListCollection, probObj404, defaultSubgoal } from '../utils';
+import { verifyError, getJsonFromUrl, dummyProbListCollection, probObj404, defaultSubgoal, submitStatus } from '../utils';
 import Dimmer from '../components/Dimmer/Dimmer';
 import Loading from '../components/Loading/Loading';
 import showToast from '../components/Toast/Toast';
@@ -33,6 +33,7 @@ const MainPage = props => {
   const [ isLoading, setIsLoading ] = useState(true);
   const [ isProblemSetLoading, setIsProblemSetLoading ] = useState(true);
   const [ isSubgoalLoading, setIsSubgoalLoading ] = useState(true);
+  const [ isSubmitted, setIsSubmitted ] = useState(false);
   const [ isAuthenticated, setIsAuthenticated] = useState(false);
   const [ account, setAccount ] = useState('');
   const [ uid, setUid ] = useState('');
@@ -106,14 +107,20 @@ const MainPage = props => {
         .where('email', '==', user.email)
         .get()
         .then(snapshot => {
+          // console.log('s', snapshot.docs[0].data());
           // console.log('snap', snapshot);
           // console.log('data', snapshot.docs[0].data());
           // const subgoalsOfProblem = snapshot.docs[.filter(doc => {return (doc.id == meta)})];
           const subgoalOfUser = snapshot.docs.length !== 0 && snapshot.docs[0].data() && snapshot.docs[0].data()[meta];
           if (subgoalOfUser) {
             const subgoal = subgoalOfUser.subgoal;
+            const status = subgoalOfUser.status;
+            // const submit
             if (subgoal && subgoal.length !== 0) {
               setSubgoal(subgoal);
+              if (status === submitStatus.done) {
+                setIsSubmitted(true);
+              }
             } else {
               setSubgoal(defaultSubgoal);
             }
@@ -134,7 +141,6 @@ const MainPage = props => {
         showToast("toast.welcome", 2000, user.email);
       } else {
         setIsAuthenticated(false);
-        showToast("toast.pleaseSignin", 2000);
       }
       setIsLoading(false);
     })
@@ -175,7 +181,7 @@ const MainPage = props => {
             />
             <Route
               path="/:probId"
-              children={isAuthenticated ? <ProblemAndSubgoal problem={problem} subgoal={subgoal} setSubgoal={setSubgoal} uid={uid} /> : <RedirectWithToast />}
+              children={isAuthenticated ? <ProblemAndSubgoal problem={problem} subgoal={subgoal} setSubgoal={setSubgoal} uid={uid} isSubmitted={isSubmitted} /> : <RedirectWithToast />}
             />
           </Switch>
         </div>

@@ -12,7 +12,7 @@
 
   "problemTableEntry.number": "번호",
   "problemTableEntry.name": "이름",
-  "problemTableEntry.correctRate": "정답률",
+  "problemTableEntry.correctRate": "참여율",
 
   "problemBox.description": "문제 설명",
   "problemBox.input": "입력",
@@ -24,8 +24,9 @@
   "subgoalBox.revise": "스텝별 문제 풀이를 수정하세요.",
   "subgoalDnd.minimumWarning": "최소 1개의 스텝이 있어야 합니다.",
 
-  "button.submit": "다른 예시들과 비교하기",
+  "button.submit": "저장하고 다른 예시들과 비교하기",
   "button.revise": "제출하기",
+  "button.alreadySubmitted": "제출 완료된 문제입니다",
   "button.moreSubgoal": "예시 더보기",
 
   "exampleBox.upvoted": "가장 칭찬받은 예시",
