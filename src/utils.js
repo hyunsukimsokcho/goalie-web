@@ -160,32 +160,14 @@ export const submitStatus = {
   wip: "WIP",
   done: "DONE"
 }
-export const freshLabels = [
-  {
-    text: 'Creative', 
-    clickedNum: 0
-  },
-  {
-    text: 'Unique',
-    clickedNum: 0
-  }, 
-  {
-    text: 'Detailed',
-    clickedNum: 0
-  }, 
-  {
-    text: 'Optimal',
-    clickedNum: 0
-  },
-  {
-    text: 'Helpful',
-    clickedNum: 0
-  },
-  {
-    text: 'Concise',
-    clickedNum: 0
-  }
-];
+export const freshLabels = {
+  Creative: {},
+  Unique: {},
+  Detailed: {},
+  Optimal: {},
+  Helpful: {},
+  Concise: {}
+};
 export const makeId = length => {
   var result           = '';
   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -194,4 +176,8 @@ export const makeId = length => {
      result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
+}
+export const makeExampleOnClickLabel = (example, label, email, bool) => {
+  example.labels[label][email] = bool;
+  return example;
 }

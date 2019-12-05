@@ -154,10 +154,11 @@ const SubgoalExamples = props => {
   const [ randomPick, setRandomPick ] = useState('');
   const [ examples, setExamples ] = useState([]);
   const [ isExampleFetched, setIsExampleFetched ] = useState(false);
+  const [ email, setEmail ] = useState('');
+  const meta = props.pathname.split('/')[1];
   useEffect(() => {
     // (1) GET subgoal collections from DB.
     // (2) Select reprsentative examples w.r.t each criteria
-    const meta = props.pathname.split('/')[1];
     if (meta) {
       return firebase
         .firestore()
@@ -170,6 +171,7 @@ const SubgoalExamples = props => {
           if (!isExampleFetched) {
             auth.onAuthStateChanged(user => {
               if (user) {
+                setEmail(user.email);
                 // Firstly filter user's own subgoals.
                 const temp = tempRaw.filter(ex => {
                   return ex[1].email !== user.email;
@@ -200,23 +202,25 @@ const SubgoalExamples = props => {
           }
           // Get examples according to found key from above.
           setExamples([
-            exampleCollection[mostUpvoted],
-            exampleCollection[mostSimilar],
-            exampleCollection[latest]
+            [mostUpvoted, exampleCollection[mostUpvoted]],
+            [mostSimilar, exampleCollection[mostSimilar]],
+            [latest, exampleCollection[latest]]
           ]);
           setIsExampleFetched(true);
         });
     }
   });
-  const renderExamples = (example, index) => {
-    if (example) {
+  const renderExamples = (exampleTuple, index) => {
+    if (exampleTuple && exampleTuple[1]) {
       return (
         <ExampleBox
           id={'example-box-' + index}
           key={index}
           index={index}
-          example={example}
+          exampleTuple={exampleTuple}
+          meta={meta}
           pseudoexample={index == 3 ? moreExample : pseudoexamples[index]}
+          email={email}
         />
       )
     } else {
@@ -226,7 +230,7 @@ const SubgoalExamples = props => {
   return (
     <>
       <div className={"subgoal-examples-conatiner"}>
-        {isExampleFetched && examples.map((example, i) => renderExamples(example, i))}
+        {isExampleFetched && examples.map((exampleTuple, i) => renderExamples(exampleTuple, i))}
         {isExampleFetched && props.moreSubgoal && renderExamples(randomPick, 3)}
       </div>
     </>
