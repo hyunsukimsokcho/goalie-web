@@ -166,47 +166,49 @@ const SubgoalExamples = props => {
         .doc(meta)
         .onSnapshot(snapshot => {
           const exampleCollection = snapshot.data();
-          const exampleSubgoals = Object.entries(exampleCollection);
-          const tempRaw = [...exampleSubgoals];
-          if (!isExampleFetched) {
-            auth.onAuthStateChanged(user => {
-              if (user) {
-                setEmail(user.email);
-                // Firstly filter user's own subgoals.
-                const temp = tempRaw.filter(ex => {
-                  return ex[1].email !== user.email;
-                });
-                // Get latest, remove, splice the list of examples.
-                temp.sort((ex1, ex2) => {
-                  return ex2[1].timestamp - ex1[1].timestamp;
-                });
-                setLatest(temp.length!==0 && temp[0][0]);
-                temp.splice(0, 1);
-                // Sort the rest of the examples according to # of upvotes.
-                // Again, remove and splice.
-                temp.sort((ex1, ex2) => {
-                  return computeUpvotes(ex2[1]) - computeUpvotes(ex1[1]);
-                })
-                setMostUpvoted(temp.length!==0 && temp[0][0]);
-                temp.splice(0, 1);
-                // Get the most similar example.
-                temp.sort((ex1, ex2) => {
-                  return computeSim(ex2[1]) - computeSim(ex1[1]);
-                });
-                setMostSimilar(temp.length!==0 && temp[0][0]);
-                const randInd = Math.floor(Math.random() * temp.length);
-                setRandomPick(temp.length!==0 && temp[randInd][0]);
-                temp.splice(randInd, 1);
-              }
-            });
+          if (exampleCollection) {
+            const exampleSubgoals = Object.entries(exampleCollection);
+            const tempRaw = [...exampleSubgoals];
+            if (!isExampleFetched) {
+              auth.onAuthStateChanged(user => {
+                if (user) {
+                  setEmail(user.email);
+                  // Firstly filter user's own subgoals.
+                  const temp = tempRaw.filter(ex => {
+                    return ex[1].email !== user.email;
+                  });
+                  // Get latest, remove, splice the list of examples.
+                  temp.sort((ex1, ex2) => {
+                    return ex2[1].timestamp - ex1[1].timestamp;
+                  });
+                  setLatest(temp.length!==0 && temp[0][0]);
+                  temp.splice(0, 1);
+                  // Sort the rest of the examples according to # of upvotes.
+                  // Again, remove and splice.
+                  temp.sort((ex1, ex2) => {
+                    return computeUpvotes(ex2[1]) - computeUpvotes(ex1[1]);
+                  })
+                  setMostUpvoted(temp.length!==0 && temp[0][0]);
+                  temp.splice(0, 1);
+                  // Get the most similar example.
+                  temp.sort((ex1, ex2) => {
+                    return computeSim(ex2[1]) - computeSim(ex1[1]);
+                  });
+                  setMostSimilar(temp.length!==0 && temp[0][0]);
+                  const randInd = Math.floor(Math.random() * temp.length);
+                  setRandomPick(temp.length!==0 && temp[randInd][0]);
+                  temp.splice(randInd, 1);
+                }
+              });
+            }
+            // Get examples according to found key from above.
+            setExamples([
+              [mostUpvoted, exampleCollection[mostUpvoted]],
+              [mostSimilar, exampleCollection[mostSimilar]],
+              [latest, exampleCollection[latest]]
+            ]);
+            setIsExampleFetched(true);
           }
-          // Get examples according to found key from above.
-          setExamples([
-            [mostUpvoted, exampleCollection[mostUpvoted]],
-            [mostSimilar, exampleCollection[mostSimilar]],
-            [latest, exampleCollection[latest]]
-          ]);
-          setIsExampleFetched(true);
         });
     }
   });

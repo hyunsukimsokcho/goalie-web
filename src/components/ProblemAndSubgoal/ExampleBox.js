@@ -92,7 +92,7 @@ const ExampleBox = props => {
         }
         {unOccupiedLabels(props.exampleTuple[1]).length !== 0 &&
           <img
-            className={"more-label-icon"}
+            className={`more-label-icon ${unOccupiedLabels(props.exampleTuple[1]).length==6 ? 'always' : ''}`}
             src={require('../../static/image/more_label.png')}
             onClick={()=>openLabelModal('example-box-' + props.index, unOccupiedLabels(props.exampleTuple[1]), handleOnLabelClick)}
           />
