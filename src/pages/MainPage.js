@@ -121,6 +121,8 @@ const MainPage = props => {
               setSubgoal(subgoal);
               if (status === submitStatus.done) {
                 setIsSubmitted(true);
+              } else {
+                setIsSubmitted(false);
               }
             } else {
               setSubgoal(defaultSubgoal);
@@ -132,6 +134,9 @@ const MainPage = props => {
       }
     })
   }, [problem, needUpdate]);
+  const signalUpdate = () => {
+    setNeedUpdate(needUpdate+1);
+  };
   useEffect(() => {
     // Checks if signed in.
     auth.onAuthStateChanged(user => {
@@ -166,6 +171,7 @@ const MainPage = props => {
             numAllUsers={numAllUsers}
             isStatLoading={isStatLoading}
             setIsStatLoading={setIsStatLoading}
+            signalUpdate={signalUpdate}
           />
         </div>
       );
@@ -193,10 +199,11 @@ const MainPage = props => {
                               problem={problem} 
                               subgoal={subgoal} 
                               setSubgoal={setSubgoal} 
-                              uid={uid} isSubmitted={isSubmitted} 
+                              uid={uid} 
+                              isSubmitted={isSubmitted} 
                               isStatLoading={isStatLoading} 
                               setIsStatLoading={setIsStatLoading} 
-                              setNeedUpdate={setNeedUpdate} 
+                              signalUpdate={signalUpdate} 
                             /> 
                           : <RedirectWithToast />
                         }

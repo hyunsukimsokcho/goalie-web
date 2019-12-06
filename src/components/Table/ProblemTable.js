@@ -89,6 +89,7 @@ const ProblemTable = props => {
               setProblem={props.setProblem} 
               submissionRate={submissionRate}
               userInfo={userInfo}
+              signalUpdate={props.signalUpdate}
             />
           );
         })

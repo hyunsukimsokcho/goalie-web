@@ -28,6 +28,7 @@ const ProblemAndSubgoal = props => {
               isSubmitted={props.isSubmitted}
               isStatLoading={props.isStatLoading}
               setIsStatLoading={props.setIsStatLoading}
+              signalUpdate={props.signalUpdate} 
             />
             {props.pathname.split('/')[2] === 'compare' && 
               <SubgoalCollection subgoal={props.subgoal} />

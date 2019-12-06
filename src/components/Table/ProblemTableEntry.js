@@ -8,6 +8,7 @@ import { submitStatus } from '../../utils';
 
 const ProblemTableEntry = props => {
   const goToProblem = () => {
+    props.signalUpdate();
     props.push(`/${props.problem.meta}`);
     if (props.problem) {
       props.setProblem(props.problem);
