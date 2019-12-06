@@ -14,6 +14,9 @@
   "problemTableEntry.name": "NAME",
   "problemTableEntry.correctRate": "SUBMISSION RATE",
 
+  "infoTableEntry.noWip": "No WIP problem",
+  "infoTableEntry.noDone": "No solved problem. Submit and share your first code design!",
+
   "problemBox.description": "Description",
   "problemBox.input": "Input",
   "problemBox.output": "Output",

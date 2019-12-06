@@ -14,6 +14,9 @@
   "problemTableEntry.name": "이름",
   "problemTableEntry.correctRate": "참여율",
 
+  "infoTableEntry.noWip": "진행중인 문제가 없습니다",
+  "infoTableEntry.noDone": "완료한 문제가 없습니다. 코드 디자인을 제출해보세요!",
+
   "problemBox.description": "문제 설명",
   "problemBox.input": "입력",
   "problemBox.output": "출력",

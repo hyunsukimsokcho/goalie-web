@@ -2,12 +2,10 @@ import messages_ko from '../../translations/ko.json';
 import messages_en from '../../translations/en.json';
 
 import './Toast.scss';
-import { getBrowserLanguageCode } from '../../utils';
-
 
 const Toast = () => {
   const FADE_TIME = 200;
-  const lang = getBrowserLanguageCode();
+  const lang = navigator.language.substr(0, 2);
   const messages = {
     ko: messages_ko,
     en: messages_en,

@@ -9,7 +9,7 @@ import ProblemTable from '../components/Table/ProblemTable';
 import ProblemAndSubgoal from '../components/ProblemAndSubgoal/ProblemAndSubgoal';
 import './MainPage.scss';
 import firebase, { auth } from '../firebase';
-import { verifyError, getJsonFromUrl, dummyProbListCollection, probObj404, defaultSubgoal, submitStatus } from '../utils';
+import { verifyError, getJsonFromUrl, probObj404, defaultSubgoal, submitStatus } from '../utils';
 import Dimmer from '../components/Dimmer/Dimmer';
 import Loading from '../components/Loading/Loading';
 import showToast from '../components/Toast/Toast';
@@ -26,7 +26,7 @@ const MainPage = props => {
    * problems in the following order (according to 'key'): 
    * (1) All, (2) WIP, and (3) Solved problems. Below will be deprecated.
    * */ 
-  const [ problemListCollection, setProblemListCollection ] = useState(dummyProbListCollection);
+  const [ problemListCollection, setProblemListCollection ] = useState([[], [], []]);
   const [ problem, setProblem ] = useState(probObj404);
   const [ subgoal, setSubgoal ] = useState([]);
   const [ currShownList, setShownList ] = useState({key: 0, id: 'problemtab.all'});
@@ -90,7 +90,7 @@ const MainPage = props => {
         .collection('problems')
         .get()
         .then(snapshot => {
-          const temp = dummyProbListCollection;
+          const temp = problemListCollection;
           temp[0] = snapshot.docs.map(doc => doc.data());
           setProblemListCollection(temp);
           if (meta) {
@@ -156,6 +156,7 @@ const MainPage = props => {
           <ProblemTab
             setClickedItem={setShownList} 
             currClickedItem={currShownList}
+            isNotUser={!isAuthenticated}
           />
           <ProblemTable
             problemListCollection={problemListCollection} 
