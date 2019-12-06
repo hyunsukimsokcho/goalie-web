@@ -29,6 +29,7 @@ const MainPage = props => {
   const [ problemListCollection, setProblemListCollection ] = useState([[], [], []]);
   const [ problem, setProblem ] = useState(probObj404);
   const [ subgoal, setSubgoal ] = useState([]);
+  const [ subgoalHistory, setSubgoalHistory ] = useState({});
   const [ currShownList, setShownList ] = useState({key: 0, id: 'problemtab.all'});
   const [ isLoading, setIsLoading ] = useState(true);
   const [ isProblemSetLoading, setIsProblemSetLoading ] = useState(true);
@@ -116,9 +117,9 @@ const MainPage = props => {
           if (subgoalOfUser) {
             const subgoal = subgoalOfUser.subgoal;
             const status = subgoalOfUser.status;
-            // const submit
-            if (subgoal && subgoal.length !== 0) {
-              setSubgoal(subgoal);
+            if (subgoal && Object.keys(subgoal).length !== 0) {
+              setSubgoalHistory(subgoal);
+              setSubgoal(Object.values(subgoal)[Object.keys(subgoal).length-1]);
               if (status === submitStatus.done) {
                 setIsSubmitted(true);
               } else {
@@ -210,7 +211,8 @@ const MainPage = props => {
                               isSubmitted={isSubmitted} 
                               isStatLoading={isStatLoading} 
                               setIsStatLoading={setIsStatLoading} 
-                              signalUpdate={signalUpdate} 
+                              signalUpdate={signalUpdate}
+                              subgoalHistory={subgoalHistory}
                             /> 
                           : <RedirectWithToast />
                         }

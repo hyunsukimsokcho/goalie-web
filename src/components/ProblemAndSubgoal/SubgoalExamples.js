@@ -11,9 +11,13 @@ import { concatSubgoal } from '../../utils';
 const SubgoalExamples = props => {
   const computeUpvotes = exampleObj => {
     let upvotes = 0;
-    exampleObj.labels.map(label => {
-      upvotes += label.clickedNum;
-    });
+    Object.values(exampleObj.labels).map((voters => {
+      Object.values(voters).map(voted => {
+        if (voted) {
+          upvotes += 1;
+        }
+      })
+    }));
     return upvotes;
   }
   const parsedSubgoal = concatSubgoal(props.subgoal);

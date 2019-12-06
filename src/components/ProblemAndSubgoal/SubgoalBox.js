@@ -9,14 +9,22 @@ import { submitStatus, makeId, freshLabels } from '../../utils';
 import showToast from '../Toast/Toast';
 
 const SubgoalBox = props => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [ isLoading, setIsLoading ] = useState(false);
+  const [ buttonAvailable, setButtonAvailable ] = useState(true);
   useEffect(() => {
     if (props.isStatLoading) {
       props.setIsStatLoading(false);
     }
   }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setButtonAvailable(false)
+    }, 1000);
+  })
   const submitSubgoal = () => {
     setIsLoading(true);
+    const newSubgoalHistory = props.subgoalHistory;
+    newSubgoalHistory[Object.keys(newSubgoalHistory).length] = props.subgoal;
     auth.onAuthStateChanged(async user => {
       if (user) {
         await firebase
@@ -26,7 +34,7 @@ const SubgoalBox = props => {
           .update({
             [props.problem.meta]: {
               status: props.isRevise ? submitStatus.done : (props.isSubmitted ? submitStatus.done : submitStatus.wip),
-              subgoal: props.subgoal
+              subgoal: newSubgoalHistory
             }
           }).then(async () => {
             if (!props.isRevise) {
@@ -72,13 +80,17 @@ const SubgoalBox = props => {
   }
   return (
     <div className={"subgoal-box-container"}>
-      <Iterator labelId={props.isRevise ? "subgoalBox.revise" : "subgoalBox.writeDown"} subgoal={props.subgoal} setSubgoal={props.setSubgoal} />
+      <Iterator 
+        labelId={props.isRevise ? "subgoalBox.revise" : "subgoalBox.writeDown"} 
+        subgoal={props.subgoal} 
+        setSubgoal={props.setSubgoal} 
+      />
       <div className={"subgoal-submit-button-container"}>
         <Button 
           theme={"primary"} 
           textId={props.isRevise ? (props.isSubmitted? "button.alreadySubmitted" : "button.revise") : "button.submit"} 
           onClick={submitSubgoal}
-          isDisabled={checkValidProblem() || checkVoidSubgoal(props.subgoal) || (props.isSubmitted && props.isRevise)}
+          isDisabled={buttonAvailable || checkValidProblem() || checkVoidSubgoal(props.subgoal) || (props.isSubmitted && props.isRevise)}
           isLoading={isLoading}
         />
       </div>

@@ -20,6 +20,7 @@
 
   "infoTableEntry.noWip": "진행중인 문제가 없습니다",
   "infoTableEntry.noDone": "완료한 문제가 없습니다. 코드 디자인을 제출해보세요!",
+  "infoTableEntry.networkError": "네트워크 연결 실패. 네트워크 연결 상태를 점검하세요", 
 
   "problemBox.description": "문제 설명",
   "problemBox.input": "입력",

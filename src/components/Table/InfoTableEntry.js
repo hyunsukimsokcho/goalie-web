@@ -8,7 +8,7 @@ const InfoTableEntry = props => {
       className={`info-table-entry-container`}
     >
       <div className={'information-text'}>
-        <FormattedMessage id={`infoTableEntry.${props.isWip ? 'noWip' : 'noDone'}`} />
+        <FormattedMessage id={`infoTableEntry.${props.tabKey==0 ? 'networkError' : props.tabKey==1 ? 'noWip' : 'noDone'}`} />
       </div>
     </div>
   );

@@ -87,7 +87,8 @@ const SubgoalCard = ({ id, text, index, moveCard, addCard, deleteCard, editCard,
                   placeholder={index === 0 ? 'e.g. Initialize integer variable count and sum to 0.' : 'Write here'}
                   className={'subgoal-card-textarea'} 
                   value={currText}
-                  onChange={e=>updateCard(this, e.target.value)}/>
+                  // onInput
+                  onChange={e=>updateCard(e.target.value)}/>
               </div>
             </div>
           </div>

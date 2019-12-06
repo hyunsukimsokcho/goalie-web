@@ -95,7 +95,7 @@ const ProblemTable = props => {
         })
       }
       {subgoalSubmissionNum && !isLoading && problemListCollection[props.currShownList.key].length===0 &&
-        <InfoTableEntry isWip={props.currShownList.key===1} />
+        <InfoTableEntry tabKey={props.currShownList.key} />
       }
     </div>
   );

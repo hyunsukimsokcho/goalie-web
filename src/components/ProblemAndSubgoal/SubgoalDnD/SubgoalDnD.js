@@ -62,7 +62,9 @@ const SubgoalDnD = props => {
   };
   return (
     <>
-      <div className={"subgoal-dnd-conatiner"}>{props.subgoal.map((card, i) => renderCard(card, i))}</div>
+      <div className={"subgoal-dnd-conatiner"}>
+        {props.subgoal.map((card, i) => renderCard(card, i))}
+      </div>
     </>
   )
 };
