@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SubgoalBox.scss';
 import Iterator from './Iterator';
 import Button from '../Button/Button';
@@ -10,6 +10,11 @@ import showToast from '../Toast/Toast';
 
 const SubgoalBox = props => {
   const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    if (props.isStatLoading) {
+      props.setIsStatLoading(false);
+    }
+  }, []);
   const submitSubgoal = () => {
     setIsLoading(true);
     auth.onAuthStateChanged(async user => {

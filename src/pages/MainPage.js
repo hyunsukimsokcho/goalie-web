@@ -37,7 +37,6 @@ const MainPage = props => {
   const [ isAuthenticated, setIsAuthenticated] = useState(false);
   const [ account, setAccount ] = useState('');
   const [ uid, setUid ] = useState('');
-  const [ userInfo, setUserInfo ] = useState();
   const [ numAllUsers, setNumAllUsers] = useState(1);
   const [ subgoalSubmissionNum, setSubgoalSubmissionNum ] = useState({});
   const [ isStatLoading, setIsStatLoading ] = useState(true);
@@ -113,9 +112,6 @@ const MainPage = props => {
         .where('email', '==', user.email)
         .get()
         .then(snapshot => {
-          if (snapshot.docs.length !== 0 && snapshot.docs[0].data()) {
-            setUserInfo(snapshot.docs[0].data());
-          }
           const subgoalOfUser = snapshot.docs.length !== 0 && snapshot.docs[0].data() && snapshot.docs[0].data()[meta];
           if (subgoalOfUser) {
             const subgoal = subgoalOfUser.subgoal;
@@ -143,11 +139,12 @@ const MainPage = props => {
         setIsAuthenticated(true);
         setUid(user.uid);
         setAccount(user.email);
+        setIsLoading(false);
         showToast("toast.welcome", 2000, user.email);
       } else {
+        setIsLoading(false);
         setIsAuthenticated(false);
       }
-      setIsLoading(false);
     })
   }, [isAuthenticated]);
   const renderNext = (isAuthenticated, next, problemListCollection) => {
@@ -166,6 +163,7 @@ const MainPage = props => {
             setProblem={setProblem}
             subgoalSubmissionNum={subgoalSubmissionNum}
             numAllUsers={numAllUsers}
+            isStatLoading={isStatLoading}
             setIsStatLoading={setIsStatLoading}
           />
         </div>
@@ -189,7 +187,7 @@ const MainPage = props => {
             />
             <Route
               path="/:probId"
-              children={isAuthenticated ? <ProblemAndSubgoal problem={problem} subgoal={subgoal} setSubgoal={setSubgoal} uid={uid} isSubmitted={isSubmitted} setIsStatLoading={setIsStatLoading} /> : <RedirectWithToast />}
+              children={isAuthenticated ? <ProblemAndSubgoal problem={problem} subgoal={subgoal} setSubgoal={setSubgoal} uid={uid} isSubmitted={isSubmitted} isStatLoading={isStatLoading} setIsStatLoading={setIsStatLoading} /> : <RedirectWithToast />}
             />
           </Switch>
         </div>

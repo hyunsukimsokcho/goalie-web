@@ -10,9 +10,6 @@ import './ProblemAndSubgoal.scss';
 
 const ProblemAndSubgoal = props => {
   const { probId } = useParams();
-  // useEffect(() => {
-  //   props.setIsStatLoading(false);
-  // }, []);
   return (
     <Switch>
       <Route
@@ -29,6 +26,8 @@ const ProblemAndSubgoal = props => {
               setSubgoal={props.setSubgoal}
               problem={props.problem}
               isSubmitted={props.isSubmitted}
+              isStatLoading={props.isStatLoading}
+              setIsStatLoading={props.setIsStatLoading}
             />
             {props.pathname.split('/')[2] === 'compare' && 
               <SubgoalCollection subgoal={props.subgoal} />
