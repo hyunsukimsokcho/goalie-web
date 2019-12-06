@@ -67,6 +67,7 @@ const ExampleBox = props => {
       <div className={"example-contents-container"}>
         {props.exampleTuple && 
           props.exampleTuple[1] && 
+          props.exampleTuple[1].content && 
           props.exampleTuple[1]
             .content.map((step, i) => renderExampleCard(step.text, i))
         }

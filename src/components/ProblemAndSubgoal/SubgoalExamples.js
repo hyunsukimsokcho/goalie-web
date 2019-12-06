@@ -29,6 +29,7 @@ const SubgoalExamples = props => {
   const [ mostSimilar, setMostSimilar ] = useState('');
   const [ latest, setLatest ] = useState('');
   const [ randomPick, setRandomPick ] = useState('');
+  const [ randomPickEx, setRandomPickEx ] = useState();
   const [ examples, setExamples ] = useState([]);
   const [ isExampleFetched, setIsExampleFetched ] = useState(false);
   const [ email, setEmail ] = useState('');
@@ -73,8 +74,11 @@ const SubgoalExamples = props => {
                   });
                   setMostSimilar(temp.length!==0 && temp[0][0]);
                   const randInd = Math.floor(Math.random() * temp.length);
-                  setRandomPick(temp.length!==0 && temp[randInd][0]);
-                  temp.splice(randInd, 1);
+                  if (temp.length!==0 && temp[randInd][0]) {
+                    setRandomPick(temp.length!==0 && temp[randInd][0]);
+                    setRandomPickEx(exampleCollection[temp.length!==0 && temp[randInd][0]]);
+                    props.setMoreExamplesDisabled(false);
+                  }
                 }
               });
             }
@@ -109,7 +113,7 @@ const SubgoalExamples = props => {
     <>
       <div className={"subgoal-examples-conatiner"}>
         {isExampleFetched && examples.map((exampleTuple, i) => renderExamples(exampleTuple, i))}
-        {isExampleFetched && props.moreSubgoal && renderExamples(randomPick, 3)}
+        {randomPick && isExampleFetched && props.moreSubgoal && renderExamples([randomPick, randomPickEx], 3)}
       </div>
     </>
   )

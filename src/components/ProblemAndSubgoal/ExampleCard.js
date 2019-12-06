@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ExampleCard.scss';
 
 const style = {
@@ -8,6 +8,17 @@ const style = {
   zIndex: '1'
 };
 const ExampleCard = props => {
+  const [ isHeightAdjusted, setIsHeightAdjusted ] = useState(false);
+  useEffect(()=>{
+    var obj = document.getElementsByClassName("example-card-textarea");
+    if (!isHeightAdjusted && obj.length != 0) {
+      Array.from(obj).map(o => {
+        o.style.height = '0px';
+        o.style.height = (o.scrollHeight+5)+`px`;
+      });
+      setIsHeightAdjusted(true);
+    }
+  });
   return (
     <div className={'example-card-container'}>
       <div className={"step-text"}>Step {props.index+1}</div>

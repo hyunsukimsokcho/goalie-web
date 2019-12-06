@@ -61,6 +61,12 @@ const SubgoalCard = ({ id, text, index, moveCard, addCard, deleteCard, editCard,
     textAreaRef.current.style.height = "0px";
     textAreaRef.current.style.height = (textAreaRef.current.scrollHeight)+"px";
   };
+  useEffect(() => {
+    if (textAreaRef.current) {
+      textAreaRef.current.style.height = "0px";
+      textAreaRef.current.style.height = (textAreaRef.current.scrollHeight)+"px";
+    }
+  }, [isLoaded]);
   return (
     <div className={'subgoal-card-container'}>
       {!isLoaded
@@ -87,8 +93,8 @@ const SubgoalCard = ({ id, text, index, moveCard, addCard, deleteCard, editCard,
                   placeholder={index === 0 ? 'e.g. Initialize integer variable count and sum to 0.' : 'Write here'}
                   className={'subgoal-card-textarea'} 
                   value={currText}
-                  // onInput
-                  onChange={e=>updateCard(e.target.value)}/>
+                  onChange={e=>updateCard(e.target.value)}
+                />
               </div>
             </div>
           </div>
