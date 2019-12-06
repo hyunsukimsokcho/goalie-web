@@ -18,8 +18,14 @@ const ProblemTable = props => {
         .get()
         .then(snapshot => {
           if (snapshot.docs.length !== 0 && snapshot.docs[0].data()) {
-            console.log(snapshot.docs[0].data());
-            setUserInfo(snapshot.docs[0].data());
+            const tempUserInfo = {};
+            const userSubmissionStat = Object.entries(snapshot.docs[0].data());
+            userSubmissionStat.map(([key, val]) => {
+              if (key !== "email") {
+                tempUserInfo[key] = val.status;
+              }
+            });
+            setUserInfo(tempUserInfo);
           }
         });
       await firebase
@@ -62,6 +68,7 @@ const ProblemTable = props => {
               problem={problem} 
               setProblem={props.setProblem} 
               submissionRate={submissionRate}
+              userInfo={userInfo}
             />
           );
         })

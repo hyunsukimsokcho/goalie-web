@@ -38,6 +38,10 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    .problem-name-content {
+      display: flex;
+      flex-direction: row;
+    }
   }
   .problem-correct-rate {
     width: 212px;

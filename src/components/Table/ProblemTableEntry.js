@@ -3,6 +3,7 @@ import './ProblemTableEntry.scss';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
+import SmartLabel from '../Label/SmartLabel';
 
 const ProblemTableEntry = props => {
   const goToProblem = () => {
@@ -25,9 +26,11 @@ const ProblemTableEntry = props => {
       <div className={'problem-name'}>
         {props.isHeader
           ? <FormattedMessage id={'problemTableEntry.name'} />
-          : <div>{props.problem.title}</div>
+          : <div className={"problem-name-content"}>
+              <div>{props.problem.title}</div>
+              <SmartLabel text="Creative" selectable={false} />
+            </div>
         }
-        
       </div>
       <div className={'problem-correct-rate'}>
         {props.isHeader
