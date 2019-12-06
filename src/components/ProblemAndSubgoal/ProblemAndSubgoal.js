@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import ProblemBox from './ProblemBox';
@@ -9,7 +8,6 @@ import SubgoalCollection from './SubgoalCollection';
 import './ProblemAndSubgoal.scss';
 
 const ProblemAndSubgoal = props => {
-  const { probId } = useParams();
   return (
     <Switch>
       <Route

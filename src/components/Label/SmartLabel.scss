@@ -12,20 +12,26 @@
   padding: 0 8px;
   display: inline-block;
   position: relative;
-  cursor: pointer;
-  &.not-selected {
-    opacity: 0.7;
+  margin-left: 6px;
+  cursor: default;
+
+  .tooltip-text {
+    visibility: hidden;
+    width: 80px;
     color: $light-black;
+    text-align: center;
+    bottom: 20px;
+    left: -25px;
+    position: absolute;
+    z-index: 1;
+  }
+
+  &:hover > .tooltip-text {
+    visibility: visible;
   }
   &.selectable {
     width: auto;
     padding: 0 10px 0 10px;
-  }
-  &.deleteable {
-    width: auto;
-    padding: 0 28px 0 10px;
-    background-color: $light-gray;
-    color: $light-black;
   }
   .label-clicked-num {
     float: right;

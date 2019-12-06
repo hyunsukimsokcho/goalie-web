@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 
 import './Navbar.scss';
-import ProblemTab from '../Tab/ProblemTab';
 
 const Navbar = props => {
   return (

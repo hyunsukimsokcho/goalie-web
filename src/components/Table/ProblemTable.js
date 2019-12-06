@@ -22,7 +22,6 @@ const ProblemTable = props => {
       });
       summary[label] = cnt;
     });
-    console.log('summary', summary);
     return summary;
   }
   useEffect(() => {
@@ -89,18 +88,9 @@ const ProblemTable = props => {
         .get()
         .then(snapshot => {
           let tempSubgoalSubmissionNum = {};
-          let receivedLabelSummary = {};
           snapshot.docs.map(doc => {
             tempSubgoalSubmissionNum[doc.id] = Object.keys(doc.data()).length;
-            if (user.email) {
-              Object.values(doc.data()).map(subgoalInfo => {
-                if (subgoalInfo.email === user.email) {
-                  receivedLabelSummary[doc.id] = summarizeReceivedLabels(subgoalInfo.labels);
-                }
-              })
-            }
           });
-          setUserReceivedLabelSummary(receivedLabelSummary);
           setSubgoalSubmissionNum(tempSubgoalSubmissionNum);
         })
       props.setIsStatLoading(false);

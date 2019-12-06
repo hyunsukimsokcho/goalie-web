@@ -30,8 +30,11 @@ const ProblemTableEntry = props => {
           ? <FormattedMessage id={'problemTableEntry.name'} />
           : <div className={"problem-name-content"}>
               <div>{props.problem.title}</div>
-              {/* {props.userReceivedLabelSummary
-              } */}
+              {props.userReceivedLabelSummary[props.problem.meta] &&
+                Object.entries(props.userReceivedLabelSummary[props.problem.meta]).map(([label, numVoted]) => {
+                    return (numVoted != 0) && <SmartLabel text={label} clickedNum={numVoted} selectable={false} />
+                })
+              }
               {/* <SmartLabel text="Creative" selectable={false} /> */}
             </div>
         }
