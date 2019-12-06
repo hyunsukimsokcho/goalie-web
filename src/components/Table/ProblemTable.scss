@@ -8,4 +8,9 @@
   @media (max-width: $bp-laptop) {
     width: 100%;
   }
+  .problem-table-loading-container {
+    width: 100%;
+    height: 440px;
+    position: relative;
+  }
 }

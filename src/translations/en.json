@@ -3,6 +3,8 @@
   "navbar.signup": "Sign up",
   "navbar.recommend": "Today's problem",
   "navbar.recent": "Go last problem",
+  "navbar.signout": "Sign out",
+  "navbar.welcome": "Account: ",
 
   "problemtab.all": "All",
   "problemtab.wip": "In progress",
@@ -10,7 +12,13 @@
 
   "problemTableEntry.number": "#",
   "problemTableEntry.name": "NAME",
-  "problemTableEntry.correctRate": "CORRECT RATE",
+  "problemTableEntry.correctRate": "SUBMISSION RATE",
+  "problemTableEntry.status": "STATUS",
+  "problemTableEntry.complete": "Complete",
+  "problemTableEntry.wip": "WIP",
+
+  "infoTableEntry.noWip": "No WIP problem",
+  "infoTableEntry.noDone": "No solved problem. Submit and share your first code design!",
 
   "problemBox.description": "Description",
   "problemBox.input": "Input",
@@ -20,9 +28,10 @@
 
   "subgoalBox.writeDown": "Write down the subgoals.",
   "subgoalBox.revise": "Revise your subgoals.",
+  "button.alreadySubmitted": "Already submitted",
   "subgoalDnd.minimumWarning": "At least one step is required.",
   
-  "button.submit": "Compare with other examples and revise",
+  "button.submit": "Save and Compare with other examples and revise",
   "button.revise": "Submit",
   "button.moreSubgoal": "See more examples",
 
@@ -31,5 +40,9 @@
   "exampleBox.latest": "Latest example",
   "exampleBox.random": "Randomly chosen example",
 
-  "toBeImplemented": "Coming Soon"
+  "toast.toBeImplemented": "Coming Soon",
+  "toast.welcome": "Welcome,",
+  "toast.pleaseSignin": "Please sign in, to share code design with others.",
+  "toast.submitted": "Submitted",
+  "toast.saved": "Saved"
 }

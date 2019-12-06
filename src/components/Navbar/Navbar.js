@@ -2,7 +2,6 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import showToast from '../Toast/Toast';
 
 import './Navbar.scss';
 
@@ -29,12 +28,19 @@ const Navbar = props => {
           </div>
         }
         <div className={"search-and-sub-buttons"}>
-          <div className={"signup"} onClick={()=>showToast('toBeImplemented', 2000)}>
-            <FormattedMessage id={"navbar.signup"} />
-          </div>
-          <div className={"signin"} onClick={()=>showToast('toBeImplemented', 2000)}>
-            <FormattedMessage id={"navbar.signin"} />
-          </div>
+          {props.isAuthenticated &&
+            <div className={"welcome"}>
+              <FormattedMessage id={"navbar.welcome"} />
+              <div className={"account"}>
+                { props.account }
+              </div>
+            </div>
+          }
+          {!props.isLoading &&
+            <div className={"signin"} onClick={props.isAuthenticated ? props.signOut : props.signInWithGoogle}>
+              <FormattedMessage id={props.isAuthenticated ? "navbar.signout" : "navbar.signin"} />
+            </div>
+          }
         </div>
       </div>
     </div>

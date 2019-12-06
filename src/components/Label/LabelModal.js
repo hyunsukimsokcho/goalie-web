@@ -13,7 +13,7 @@ const ProfileModal = props => {
         <div className={"label-select-container"}>
         {
           props.notSelectedLabels.map(label => {
-            return (<Label text={label.text} onClick={()=>props.handleOnLabelClick(label.text)} />);
+            return (<Label text={label} onClick={()=>props.handleOnLabelClick(label, true)} />);
           })
         }
         </div>

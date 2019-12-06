@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './Label.scss';
+import './SmartLabel.scss';
 
-const Label = props => {
+const SmartLabel = props => {
   return (
     <div 
-      className={`category-tag ${props.text.toLowerCase()} ${props.selectable ? 'selectable' : ''} ${(props.selectable && !props.isSelected) ? 'not-selected' : ''}`}
+      className={`smart-label-container ${props.text.toLowerCase()} ${props.selectable ? 'selectable' : ''} ${(props.selectable && !props.isSelected) ? 'not-selected' : ''}`}
       onClick={props.selectable ? ()=>props.handleOnLabelClick(props.text, props.isSelected) : (props.onClick ? props.onClick : null)}
     >
       { props.selectable ? props.text + ' +' + props.clickedNum : props.text }
@@ -12,4 +12,4 @@ const Label = props => {
   );
 };
 
-export default Label;
+export default SmartLabel;

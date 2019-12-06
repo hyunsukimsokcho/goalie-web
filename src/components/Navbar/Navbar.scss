@@ -102,69 +102,30 @@
       }
       
       .signin {
-        width: 49px;
         line-height: 30px;
         text-align: center;
         margin-left: 15px;
-
+        white-space: nowrap;
         &:hover {
           cursor: pointer;
         }
       }
-      .signup {
-        width: 49px;
+      .welcome {
+        display: flex;
+        flex-direction: row;
         line-height: 30px;
         text-align: center;
         margin: 0 15px;
-
-        &:hover {
-          cursor: pointer;
-        }
-      }
-      .set-lang {
-        position: relative;
-        width: 36px;
-        height: 20px;
-        background-color: #aaaaaa;
-        border-radius: 2px;
-
-        line-height: 20px;
-        text-align: center;
-        color: $white;
-        margin: auto;
-
-        &:hover {
-          cursor: pointer;
-        }
-
-        .lang-dropdown {
-          position: absolute;
-          right: 0px;
-
-          &:hover {
-            cursor: default;
-          }
-
-          .lang-select-row {
-            position: relative;
-            width: 75px;
-            height: 35px;
-            background-color: $light-gray;
-            
-            line-height: 35px;
-            text-align: center;
-            color: $black;
-
-            .flag {
-              width: auto;
-              height: 15px;
-              margin-right: 10px;
-              vertical-align: middle;
-            }
-
-            &:hover {
-              background-color: $gray;
-            }
+        white-space: nowrap;
+        .account {
+          margin-left: 4px;
+          font-weight: bold;
+          color: #5bbb;
+          @media (max-width: $bp-mobile) {
+            width: 80px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
           }
         }
       }

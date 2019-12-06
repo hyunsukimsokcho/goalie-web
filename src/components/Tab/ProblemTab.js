@@ -9,10 +9,13 @@ const ProblemTab = props => {
     {key: 1, id: 'problemtab.wip'},
     {key: 2, id: 'problemtab.solved'}
   ];
+  const tabListNotUser = [
+    {key: 0, id: 'problemtab.all'}
+  ];
   return (
     <div className={"problem-tab-container"}>
       {
-        tabList
+        (props.isNotUser ? tabListNotUser : tabList)
           .map(tab => (
             <div
               className={`tab-item ${props.currClickedItem.id === tab.id ? "clicked" : ""}`} 

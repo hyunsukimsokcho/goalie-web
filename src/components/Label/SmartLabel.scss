@@ -1,0 +1,61 @@
+@import '../../default.scss';
+
+.smart-label-container {
+  height: 20px;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: bold;
+  color: $black;
+  opacity: 1;
+  line-height: 20px;
+  text-align: center;
+  padding: 0 8px;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  &.not-selected {
+    opacity: 0.7;
+    color: $light-black;
+  }
+  &.selectable {
+    width: auto;
+    padding: 0 10px 0 10px;
+  }
+  &.deleteable {
+    width: auto;
+    padding: 0 28px 0 10px;
+    background-color: $light-gray;
+    color: $light-black;
+  }
+  .label-clicked-num {
+    float: right;
+    width: 10px;
+    line-height: 20px;
+    position: absolute;
+    margin-left: 2px;
+    background-size: cover;
+    right: 15px;
+    top: 50%;
+    font-size: 12px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  &.creative {
+    background-color: $goalie-creative;
+  }
+  &.concise {
+    background-color: $goalie-concise;
+  }
+  &.helpful {
+    background-color: $goalie-helpful;
+  }
+  &.unique {
+    background-color: $goalie-unique;
+  }
+  &.detailed {
+    background-color: $goalie-detailed;
+  }
+  &.optimal {
+    background-color: $goalie-optimal;
+  }
+}

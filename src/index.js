@@ -30,9 +30,8 @@ const store = configureStore(initialState, history);
 
 ReactDOM.render(
   <IntlProvider
-    // locale={language in providingLanguage ? language : 'en'}
-    locale={'en'}
-    messages={messages[providingLanguage['en']]}
+    locale={language in providingLanguage ? language : 'en'}
+    messages={messages[providingLanguage[language]]}
   >
     <App store={store} history={history} />
   </IntlProvider>,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -10,26 +10,6 @@ import './ProblemAndSubgoal.scss';
 
 const ProblemAndSubgoal = props => {
   const { probId } = useParams();
-  const dummyProbObj = {
-    find_average: {
-      description: 
-        `Find an average of the given numbers. For example, if you have 1, 2, 3, 4, 5, then the average of the given 5 numbers is calculated as (1+2+3+4+5)/5 = 3`,
-      input: 
-        `N in the first row and N numbers in the second row.`,
-      output: 
-        `Average of the given N numbers.`,
-      example:
-        [[`3
-10 20 30`, `20`],[`4
-10 10 10 10`, `10`]],
-    },
-  }
-  const [subgoals, setSubgoals] = useState([
-    {
-      id: 1,
-      text: '',
-    }
-  ]);
   return (
     <Switch>
       <Route
@@ -37,17 +17,21 @@ const ProblemAndSubgoal = props => {
         render={() => (
           <div className={"problem-and-subgoal-container"}>
             {props.pathname.split('/')[2] !== 'compare' && 
-              <ProblemBox problem={dummyProbObj["find_average"]}/>
+              <ProblemBox problem={props.problem}/>
             }
             <SubgoalBox 
               isMine={true} 
               isRevise={props.pathname.split('/')[2] === 'compare'} 
-              subgoals={subgoals} 
-              setSubgoals={setSubgoals} 
-              probId={probId} 
+              subgoal={props.subgoal} 
+              setSubgoal={props.setSubgoal}
+              problem={props.problem}
+              isSubmitted={props.isSubmitted}
+              isStatLoading={props.isStatLoading}
+              setIsStatLoading={props.setIsStatLoading}
+              signalUpdate={props.signalUpdate} 
             />
             {props.pathname.split('/')[2] === 'compare' && 
-              <SubgoalCollection />
+              <SubgoalCollection subgoal={props.subgoal} />
             }
           </div>
         )}

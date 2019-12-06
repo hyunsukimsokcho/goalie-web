@@ -2,13 +2,10 @@ import messages_ko from '../../translations/ko.json';
 import messages_en from '../../translations/en.json';
 
 import './Toast.scss';
-import { getBrowserLanguageCode } from '../../utils';
-
 
 const Toast = () => {
   const FADE_TIME = 200;
-  // const lang = getBrowserLanguageCode();
-  const lang = 'en';
+  const lang = navigator.language.substr(0, 2);
   const messages = {
     ko: messages_ko,
     en: messages_en,
@@ -39,10 +36,17 @@ const Toast = () => {
     gloToast = gloToastContainer.appendChild(Toast());
   }
 
-  function setText(text) {
+  function setText(text, subText) {
     if (lastText !== text) {
       gloToast.innerText = messages[lang][text] || 'Loading..';
       lastText = text;
+      if (subText) {
+        if (lang == 'ko') {
+          gloToast.innerText = subText + ' 님, ' + gloToast.innerText
+        } else {
+          gloToast.innerText += ' ' + subText;
+        }
+      }
     }
   }
 
@@ -130,10 +134,10 @@ const Toast = () => {
     }
   }
 
-  function run(text, showTime, now) {
+  function run(text, showTime, now, subText) {
     lastShowTime = showTime;
     lastInvokeTime = now;
-    setText(text);
+    setText(text, subText);
     fadeinToast();
     // The time to fadein and fadeout is not contain in show time.
     mainTimer.id = startTimer(() => {
@@ -143,7 +147,7 @@ const Toast = () => {
     }, FADE_TIME + showTime);
   }
 
-  function showToast(text, showTime) {
+  function showToast(text, showTime, subText) {
     const now = Date.now();
 
     setElement();
@@ -151,10 +155,10 @@ const Toast = () => {
     if (!gloToast) renderToast();
 
     if (!mainTimer.id) {
-      run(text, showTime, now);
+      run(text, showTime, now, subText);
     } else {
       stop(showTime, now, () => {
-        run(text, showTime, now);
+        run(text, showTime, now, subText);
       });
     }
   }

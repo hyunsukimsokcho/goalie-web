@@ -1,3 +1,5 @@
+import showToast from './components/Toast/Toast';
+
 export const getBrowserLanguageCode = () => {
   return navigator.language.substr(0, 2);
 };
@@ -22,3 +24,87 @@ export const metaTagContents = {
     en: 'Goalie, code design sharing platform',
   },
 };
+export const verifyError = async err => {
+  let description = '';
+  switch (err.code) {
+    case 'auth/network-request-failed':
+      description = 'signin.error.networkError';
+      break;
+    case 'auth/too-many-requests':
+      description = 'total.alert.serverError';
+      break;
+    case 'auth/popup-blocked':
+      description = 'total.alert.serverError';
+      break;
+    case 'auth/popup-closed-by-user':
+      break;
+    case undefined:
+      break;
+    default:
+      alert(err.code);
+      break;
+  }
+  description && showToast(description, 2000);
+  return;
+};
+export const probObj404 = {
+  description: 
+    `404 NOT FOUND`,
+  input: 
+    `Please check your network connections.`,
+  output: 
+    `Otherwise, please go back to main page and retry.`,
+  examples:
+    [],
+};
+export const defaultSubgoal = [
+  {
+    id: 1,
+    text: '',
+  }
+];
+export const concatSubgoal = (subgoal) => {
+  let concatenated = '';
+  subgoal.map(s => {
+    if (s.text) {
+      concatenated += " ";
+    }
+    concatenated += s.text;
+  });
+  return concatenated.trim();
+}
+export const getJsonFromUrl = url => {
+  if(!url) url = window.location.search;
+  var query = url.substr(1);
+  var result = {};
+  query.split("&").forEach(function(part) {
+    var item = part.split("=");
+    result[item[0]] = decodeURIComponent(item[1]);
+  });
+  return result;
+}
+export const submitStatus = {
+  wip: "WIP",
+  done: "DONE"
+}
+export const freshLabels = {
+  Creative: {},
+  Unique: {},
+  Detailed: {},
+  Optimal: {},
+  Helpful: {},
+  Concise: {}
+};
+export const makeId = length => {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+export const makeExampleOnClickLabel = (example, label, email, bool) => {
+  example.labels[label][email] = bool;
+  return example;
+}

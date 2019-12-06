@@ -4,6 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import './ExampleBox.scss';
 import Label from '../Label/Label';
 import { openLabelModal } from '../Label/LabelModal';
+import firebase, { auth } from '../../firebase';
+import { makeExampleOnClickLabel } from '../../utils';
 
 const ExampleBox = props => {
   let labelId = 'exampleBox.upvoted';
@@ -27,60 +29,72 @@ const ExampleBox = props => {
       />
     )
   };
-  const [currSelectedLabels, setCurrSelectedLabels] = useState(props.example.selectedLabels || []);
-  const [currNotSelectedLabels, setCurrNotSelectedLabels] = useState(props.example.notSelectedLabels || []);
-  const handleNewLabelClick = label => {
-    const newCurrSelectedLabels = currSelectedLabels
-    newCurrSelectedLabels.push({
-      text: label,
-      clickedNum: 1,
-      isSelected: true,
+  const handleOnLabelClick = (label, isClicked) => {
+    auth.onAuthStateChanged(async user => {
+      if (user) {
+        await firebase
+          .firestore()
+          .collection('subgoals')
+          .doc(props.meta)
+          .update({
+            [props.exampleTuple[0]]: 
+              makeExampleOnClickLabel(props.exampleTuple[1], label, user.email, !isClicked)
+          });
+      }
+    })
+  };
+  const countClicks = labelInfo => {
+    let cnt = 0;
+    Object.values(labelInfo).map(clicked => {
+      if (clicked) { cnt += 1 }
     });
-    const newCurrNotSelectedLabels = currNotSelectedLabels.filter(labelObj => {
-      return (labelObj.text !== label);
-    });
-    setCurrSelectedLabels(newCurrSelectedLabels);
-    setCurrNotSelectedLabels(newCurrNotSelectedLabels);
+    return cnt;
   }
-  const makeLabelDisappear = label => {
-    const newCurrNotSelectedLabels = currNotSelectedLabels
-    newCurrNotSelectedLabels.push({
-      text: label,
-      clickedNum: 0,
-    });
-    const newCurrSelectedLabels = currSelectedLabels.filter(labelObj => {
-      return (labelObj.text !== label);
-    });
-    setCurrSelectedLabels(newCurrSelectedLabels);
-    setCurrNotSelectedLabels(newCurrNotSelectedLabels);
-  }
+  const unOccupiedLabels = example => {
+    const filtered = Object.entries(example.labels)
+      .filter(labelPair => {
+        return countClicks(labelPair[1]) == 0;
+      })
+    return filtered.map(labelPair => {
+        return labelPair[0];
+      });
+  };
   return (
     <div className={"example-box-container"} id={props.id}>
       <FormattedMessage id={labelId} defaultMessage={"loading"}>
         {msg => <div className={"example-box-label"}>{msg}</div>}
       </FormattedMessage>
       <div className={"example-contents-container"}>
-        {props.example.subgoal.map((text, i) => renderExampleCard(text, i))}
+        {props.exampleTuple && 
+          props.exampleTuple[1] && 
+          props.exampleTuple[1]
+            .content.map((step, i) => renderExampleCard(step.text, i))
+        }
       </div>
       <div className={"labels-container"}>
         {
-          currSelectedLabels.map(label => {
-            return (
-              <Label 
-                text={label.text} 
-                selectable={true} 
-                clickedNum={label.clickedNum} 
-                isSelected={label.isSelected}
-                makeLabelDisappear={makeLabelDisappear}
-              />
-            );
+          Object.entries(props.exampleTuple[1].labels).map(labelPair => {
+            // labelPair : [ label: text, labelInfo: {email: string, clicked: boolean}[] ]
+            const clickCnt = countClicks(labelPair[1]);
+            if (clickCnt !== 0) {
+              return (
+                <Label 
+                  key={labelPair[0]}
+                  text={labelPair[0]} 
+                  selectable={true}
+                  clickedNum={countClicks(labelPair[1])}
+                  isSelected={labelPair[1][props.email]}
+                  handleOnLabelClick={handleOnLabelClick}
+                />
+              );
+            }
           })
         }
-        {currNotSelectedLabels.length !== 0 &&
+        {unOccupiedLabels(props.exampleTuple[1]).length !== 0 &&
           <img
-            className={"more-label-icon"}
+            className={`more-label-icon ${unOccupiedLabels(props.exampleTuple[1]).length==6 ? 'always' : ''}`}
             src={require('../../static/image/more_label.png')}
-            onClick={()=>openLabelModal('example-box-' + props.index, currNotSelectedLabels, handleNewLabelClick)}
+            onClick={()=>openLabelModal('example-box-' + props.index, unOccupiedLabels(props.exampleTuple[1]), handleOnLabelClick)}
           />
         }
         </div>
