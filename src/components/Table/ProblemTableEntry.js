@@ -30,6 +30,8 @@ const ProblemTableEntry = props => {
           ? <FormattedMessage id={'problemTableEntry.name'} />
           : <div className={"problem-name-content"}>
               <div>{props.problem.title}</div>
+              {/* {props.userReceivedLabelSummary
+              } */}
               {/* <SmartLabel text="Creative" selectable={false} /> */}
             </div>
         }

@@ -11,7 +11,20 @@ const ProblemTable = props => {
   const [ subgoalSubmissionNum, setSubgoalSubmissionNum ] = useState();
   const [ userInfo, setUserInfo ] = useState();
   const [ isLoading, setIsLoading ] = useState(true);
+  const [ userReceivedLabelSummary, setUserReceivedLabelSummary ] = useState({});
   const [ problemListCollection, setProblemListCollection ] = useState(props.problemListCollection);
+  const summarizeReceivedLabels = labelsData => {
+    let summary = {};
+    Object.keys(labelsData).map(label => {
+      let cnt = 0;
+      Object.values(labelsData[label]).map(isVoted => {
+        if (isVoted) { cnt += 1; }
+      });
+      summary[label] = cnt;
+    });
+    console.log('summary', summary);
+    return summary;
+  }
   useEffect(() => {
     auth.onAuthStateChanged(async user => {
       if (user) {
@@ -47,6 +60,21 @@ const ProblemTable = props => {
               setUserInfo(tempUserInfo);
             }
           });
+        await firebase
+          .firestore()
+          .collection('subgoals')
+          .get()
+          .then(snapshot => {
+            let receivedLabelSummary = {};
+            snapshot.docs.map(doc => {
+              Object.values(doc.data()).map(subgoalInfo => {
+                if (subgoalInfo.email === user.email) {
+                  receivedLabelSummary[doc.id] = summarizeReceivedLabels(subgoalInfo.labels);
+                }
+              })
+            });
+            setUserReceivedLabelSummary(receivedLabelSummary);
+          });
       }
       await firebase
         .firestore()
@@ -61,9 +89,18 @@ const ProblemTable = props => {
         .get()
         .then(snapshot => {
           let tempSubgoalSubmissionNum = {};
+          let receivedLabelSummary = {};
           snapshot.docs.map(doc => {
             tempSubgoalSubmissionNum[doc.id] = Object.keys(doc.data()).length;
+            if (user.email) {
+              Object.values(doc.data()).map(subgoalInfo => {
+                if (subgoalInfo.email === user.email) {
+                  receivedLabelSummary[doc.id] = summarizeReceivedLabels(subgoalInfo.labels);
+                }
+              })
+            }
           });
+          setUserReceivedLabelSummary(receivedLabelSummary);
           setSubgoalSubmissionNum(tempSubgoalSubmissionNum);
         })
       props.setIsStatLoading(false);
@@ -83,13 +120,14 @@ const ProblemTable = props => {
           const submissionRate = subgoalSubmissionNum[problem.meta]/numAllUsers;
           return (
             <ProblemTableEntry 
-              key={i+1} 
-              number={i+1} 
-              problem={problem} 
-              setProblem={props.setProblem} 
+              key={i+1}
+              number={i+1}
+              problem={problem}
+              setProblem={props.setProblem}
               submissionRate={submissionRate}
               userInfo={userInfo}
               signalUpdate={props.signalUpdate}
+              userReceivedLabelSummary={userReceivedLabelSummary}
             />
           );
         })

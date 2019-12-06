@@ -73,6 +73,7 @@ const SubgoalExamples = props => {
                     return computeSim(ex2[1]) - computeSim(ex1[1]);
                   });
                   setMostSimilar(temp.length!==0 && temp[0][0]);
+                  temp.splice(0, 1);
                   const randInd = Math.floor(Math.random() * temp.length);
                   if (temp.length!==0 && temp[randInd][0]) {
                     setRandomPick(temp.length!==0 && temp[randInd][0]);
