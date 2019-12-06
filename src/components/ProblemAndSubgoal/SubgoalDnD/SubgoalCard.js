@@ -21,6 +21,7 @@ const SubgoalCard = ({ id, text, index, moveCard, addCard, deleteCard, editCard,
     }, 1000);
   }, [text]);
   const ref = useRef(null);
+  const textAreaRef = useRef(null);
   const [, drop] = useDrop({
     accept: ItemTypes.CARD,
     hover(item, monitor) {
@@ -57,6 +58,8 @@ const SubgoalCard = ({ id, text, index, moveCard, addCard, deleteCard, editCard,
   const updateCard = newText => {
     setCurrText(newText);
     editCard(id, index, newText);
+    textAreaRef.current.style.height = "0px";
+    textAreaRef.current.style.height = (textAreaRef.current.scrollHeight)+"px";
   };
   return (
     <div className={'subgoal-card-container'}>
@@ -80,10 +83,11 @@ const SubgoalCard = ({ id, text, index, moveCard, addCard, deleteCard, editCard,
               </div>
               <div ref={ref} style={{ ...style, opacity }}>
                 <textarea 
+                  ref={textAreaRef}
                   placeholder={index === 0 ? 'e.g. Initialize integer variable count and sum to 0.' : 'Write here'}
                   className={'subgoal-card-textarea'} 
-                  value={currText} 
-                  onChange={e=>updateCard(e.target.value)}/>
+                  value={currText}
+                  onChange={e=>updateCard(this, e.target.value)}/>
               </div>
             </div>
           </div>
