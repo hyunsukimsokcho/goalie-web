@@ -1,10 +1,11 @@
 {
-  "navbar.signin": "Sign in",
+  "navbar.signin": "Sign in with Gmail",
   "navbar.signup": "Sign up",
   "navbar.recommend": "Today's problem",
   "navbar.recent": "Go last problem",
   "navbar.signout": "Sign out",
   "navbar.welcome": "Account: ",
+  "navbar.problemTitle": "Problem: ",
 
   "problemtab.all": "All",
   "problemtab.wip": "In progress",

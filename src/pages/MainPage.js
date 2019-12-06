@@ -183,7 +183,14 @@ const MainPage = props => {
       {(isProblemSetLoading || isLoading || isStatLoading) && 
         <Loading />
       }
-      <Navbar signInWithGoogle={signInWithGoogle} isLoading={isLoading} isAuthenticated={isAuthenticated} signOut={signOut} account={account} />
+      <Navbar 
+        signInWithGoogle={signInWithGoogle} 
+        isLoading={isLoading} 
+        isAuthenticated={isAuthenticated} 
+        signOut={signOut} 
+        account={account} 
+        problem={problem}
+      />
       {!isProblemSetLoading &&
         <div className={'main-content-container'}>
           <Switch>

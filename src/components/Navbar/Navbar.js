@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 
 import './Navbar.scss';
+import ProblemTab from '../Tab/ProblemTab';
 
 const Navbar = props => {
   return (
@@ -15,16 +16,10 @@ const Navbar = props => {
           alt={'goalie-logo'}
           onClick={props.pathname === '/' ? null : ()=>props.push('/')}
         />
-        {false &&
-          <div className={"main-buttons"}>
-            <div className={"project-look-around"}>
-              <FormattedMessage id={"navbar.recommend"}>
-                {msg => <div className={'text'}>{msg}</div>}
-              </FormattedMessage>
-            </div>
-            <div className={"project-start"}>
-              <FormattedMessage id={"navbar.recent"} />
-            </div>
+        {props.problem.title && props.pathname !== '/' &&
+          <div className={"problem-title-container"}>
+            <FormattedMessage id={"navbar.problemTitle"} />
+            <div className={"problem-title"}>{props.problem.title}</div>
           </div>
         }
         <div className={"search-and-sub-buttons"}>

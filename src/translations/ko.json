@@ -1,10 +1,11 @@
 {
-  "navbar.signin": "로그인",
+  "navbar.signin": "Gmail로 로그인",
   "navbar.signup": "회원가입",
   "navbar.recommend": "오늘의 추천 문제",
   "navbar.recent": "최근 문제 보러가기",
   "navbar.signout": "로그아웃",
   "navbar.welcome": "계정: ",
+  "navbar.problemTitle": "문제: ",
 
   "problemtab.all": "전체",
   "problemtab.wip": "진행중",

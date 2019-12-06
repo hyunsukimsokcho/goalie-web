@@ -27,43 +27,23 @@
       }
     }
 
-    .main-buttons {
+    .problem-title-container {
       display: flex;
-      padding: 13px 0;
-      margin-left: 15px;
-      font-weight: bold;
-
-      .project-look-around {
-        width: 140px;
-        height: 40px;
-
-        line-height: 40px;
-        text-align: center;
-        color: $white;
-
-        .text {
-          display: inline;
-          &:hover {
-            cursor: pointer;
-          }
-        }
-      }
-
-      .project-start {
-        width: 140px;
-        height: 40px;
-
-        line-height: 40px;
-        text-align: center;
-        color: $white;
-
-        background-color: $goalie-red;
-        border-radius: 2px;
+      flex-direction: row;
+      padding: 18px 0;
+      margin-left: 30px;
+      color: $gray;
+      font-size: 20px;
+      line-height: 30px;
+      text-align: center;
+      .problem-title {
         margin-left: 8px;
-
-        &:hover {
-          cursor: pointer;
-        }
+        color: $google-green;
+        font-size: 20px;
+        font-weight: bold;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
       }
     }
 
