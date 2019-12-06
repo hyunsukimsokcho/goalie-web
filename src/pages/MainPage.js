@@ -32,13 +32,13 @@ const MainPage = props => {
   const [ currShownList, setShownList ] = useState({key: 0, id: 'problemtab.all'});
   const [ isLoading, setIsLoading ] = useState(true);
   const [ isProblemSetLoading, setIsProblemSetLoading ] = useState(true);
-  const [ isSubgoalLoading, setIsSubgoalLoading ] = useState(true);
   const [ isSubmitted, setIsSubmitted ] = useState(false);
   const [ isAuthenticated, setIsAuthenticated] = useState(false);
   const [ account, setAccount ] = useState('');
   const [ uid, setUid ] = useState('');
   const [ numAllUsers, setNumAllUsers] = useState(1);
   const [ subgoalSubmissionNum, setSubgoalSubmissionNum ] = useState({});
+  const [ needUpdate, setNeedUpdate ] = useState(0);
   const [ isStatLoading, setIsStatLoading ] = useState(true);
   const next = getJsonFromUrl().next;
   const signInWithGoogle = async () => {
@@ -131,7 +131,7 @@ const MainPage = props => {
         });
       }
     })
-  }, [problem]);
+  }, [problem, needUpdate]);
   useEffect(() => {
     // Checks if signed in.
     auth.onAuthStateChanged(user => {
@@ -188,7 +188,18 @@ const MainPage = props => {
             />
             <Route
               path="/:probId"
-              children={isAuthenticated ? <ProblemAndSubgoal problem={problem} subgoal={subgoal} setSubgoal={setSubgoal} uid={uid} isSubmitted={isSubmitted} isStatLoading={isStatLoading} setIsStatLoading={setIsStatLoading} /> : <RedirectWithToast />}
+              children={isAuthenticated 
+                          ? <ProblemAndSubgoal 
+                              problem={problem} 
+                              subgoal={subgoal} 
+                              setSubgoal={setSubgoal} 
+                              uid={uid} isSubmitted={isSubmitted} 
+                              isStatLoading={isStatLoading} 
+                              setIsStatLoading={setIsStatLoading} 
+                              setNeedUpdate={setNeedUpdate} 
+                            /> 
+                          : <RedirectWithToast />
+                        }
             />
           </Switch>
         </div>

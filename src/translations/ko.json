@@ -13,6 +13,9 @@
   "problemTableEntry.number": "번호",
   "problemTableEntry.name": "이름",
   "problemTableEntry.correctRate": "참여율",
+  "problemTableEntry.status": "상태",
+  "problemTableEntry.complete": "완료",
+  "problemTableEntry.wip": "진행중",
 
   "infoTableEntry.noWip": "진행중인 문제가 없습니다",
   "infoTableEntry.noDone": "완료한 문제가 없습니다. 코드 디자인을 제출해보세요!",

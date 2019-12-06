@@ -33,7 +33,7 @@
     overflow: hidden;
   }
   .problem-name {
-    width: 700px;
+    width: 600px;
     font-size: inherit;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -49,5 +49,21 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+  }
+  .problem-submit-status {
+    width: 100px;
+    font-size: inherit;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    .status-text-container {
+      font-weight: bold;
+      .complete {
+        color: $google-blue;
+      }
+      .wip {
+        color: $google-yellow;
+      }
+    }
   }
 }

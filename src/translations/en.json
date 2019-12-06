@@ -13,6 +13,9 @@
   "problemTableEntry.number": "#",
   "problemTableEntry.name": "NAME",
   "problemTableEntry.correctRate": "SUBMISSION RATE",
+  "problemTableEntry.status": "STATUS",
+  "problemTableEntry.complete": "Complete",
+  "problemTableEntry.wip": "WIP",
 
   "infoTableEntry.noWip": "No WIP problem",
   "infoTableEntry.noDone": "No solved problem. Submit and share your first code design!",
