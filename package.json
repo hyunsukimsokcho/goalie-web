@@ -20,7 +20,8 @@
     "react-skeleton-loader": "^1.0.4",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
-    "string-cosine-similarity": "^2.0.0"
+    "string-cosine-similarity": "^2.0.0",
+    "string-similarity": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

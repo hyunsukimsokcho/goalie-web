@@ -1,0 +1,93 @@
+@import '../../default.scss';
+
+.modal-background {
+  position: fixed;
+  top: 0px;
+
+  z-index: 9998;
+
+  width: 100%;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.4);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  .modal-container {
+    width: 80%;
+    max-width: 400px;
+    background-color: white;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+
+    border-radius: 10px;
+
+    padding: 20px 25px 20px 25px;
+
+    z-index: 9999;
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .modal-buttons-container {
+      width: 100%;
+      margin-top: 15px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+
+      .modal-button {
+        margin-left: 30px;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &.default-with-gray-text {
+          color: $light-black;
+        }
+
+        &.confirm-with-blue-text {
+          color: $classum-blue;
+        }
+
+        &.warning-with-red {
+          padding: 7px 12px 7px 12px;
+          background-color: $classum-red;
+          color: white;
+
+          &:hover {
+            background-color: $classum-red-darker-for-hover;
+          }
+        }
+
+        &.submit-with-blue {
+          padding: 7px 12px 7px 12px;
+          background-color: $classum-blue;
+          color: white;
+
+          &:hover {
+            background-color: $classum-blue-darker-for-hover;
+          }
+        }
+
+        &.cancel-with-light-black {
+          padding: 7px 12px 7px 12px;
+          background-color: $light-black;
+          color: white;
+
+          &:hover {
+            background-color: $light-black-darker-for-hover;
+          }
+        }
+      }
+    }
+  }
+  // .modal-enter {
+  //   display: none;
+  // }
+}
