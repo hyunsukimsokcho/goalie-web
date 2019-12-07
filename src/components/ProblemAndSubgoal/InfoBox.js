@@ -30,9 +30,11 @@ const InfoBox = props => {
     <div className={"info-box-container"}>
       {props.labelId && 
         <FormattedMessage id={props.labelId}>
-          {msg => <div className={"info-box-label"}>
-            {props.labelId.endsWith('example')? (msg + " " + props.num) : msg}
-          </div>}
+          {msg => 
+            <div className={"info-box-label"}>
+              {props.labelId.endsWith('example') ? (msg + " " + props.num) : msg}
+            </div>
+          }
         </FormattedMessage>
       }
       <textarea 
