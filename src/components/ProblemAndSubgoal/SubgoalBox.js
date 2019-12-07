@@ -57,7 +57,7 @@ const SubgoalBox = props => {
                   }
                 })
                 .then(async () => {
-                  showToast("toast.submitted", 2000);
+                  showToast("toast.submitted", 5000);
                   props.push('/');
                 })
                 .finally(() => {
