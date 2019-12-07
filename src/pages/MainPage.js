@@ -126,9 +126,11 @@ const MainPage = props => {
                 setIsSubmitted(false);
               }
             } else {
+              setSubgoalHistory({});
               setSubgoal(defaultSubgoal);
             }
           } else {
+            setSubgoalHistory({});
             setSubgoal(defaultSubgoal);
           }
         });
