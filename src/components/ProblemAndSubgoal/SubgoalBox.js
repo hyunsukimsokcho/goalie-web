@@ -100,6 +100,7 @@ const SubgoalBox = props => {
                 .then(async () => {
                   showToast("toast.submitted", 5000);
                   props.push('/');
+                  props.signalUpdate();
                 })
                 .finally(() => {
                   setIsLoading(false);

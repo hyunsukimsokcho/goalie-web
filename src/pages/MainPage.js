@@ -107,6 +107,7 @@ const MainPage = props => {
     const meta = props.pathname.split('/')[1];
     auth.onAuthStateChanged(async user => {
       if (user) {
+        setIsSubmitted(false);
         await firebase
         .firestore()
         .collection('users')
