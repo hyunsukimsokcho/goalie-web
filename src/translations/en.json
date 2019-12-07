@@ -22,6 +22,8 @@
   "infoTableEntry.noDone": "No solved problem. Submit and share your first code design!",
   "infoTableEntry.networkError": "Network connection error. Please check network connection.",
 
+  "formTableEntry.formPlz": "Please fill out this survey!",
+
   "problemBox.description": "Description",
   "problemBox.input": "Input",
   "problemBox.output": "Output",

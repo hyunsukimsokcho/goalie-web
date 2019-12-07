@@ -5,6 +5,7 @@ import firebase, { auth } from '../../firebase';
 import Loading from '../Loading/Loading';
 import { submitStatus } from '../../utils';
 import InfoTableEntry from './InfoTableEntry';
+import FormTableEntry from './FormTableEntry';
 
 const ProblemTable = props => {
   const [ numAllUsers, setNumAllUsers ] = useState();
@@ -125,6 +126,7 @@ const ProblemTable = props => {
       {subgoalSubmissionNum && !isLoading && problemListCollection[props.currShownList.key].length===0 &&
         <InfoTableEntry tabKey={props.currShownList.key} />
       }
+      <FormTableEntry />
     </div>
   );
 }
