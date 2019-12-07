@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import similarity from 'string-cosine-similarity';
+import stringSimilarity from 'string-similarity';
 
 import ExampleBox from './ExampleBox';
 import firebase, { auth } from '../../firebase';
@@ -23,7 +23,7 @@ const SubgoalExamples = props => {
   const parsedSubgoal = concatSubgoal(props.subgoal);
   const computeSim = exampleObj => {
     const parsedExample = concatSubgoal(exampleObj.content);
-    return similarity(parsedSubgoal, parsedExample);
+    return stringSimilarity(parsedSubgoal, parsedExample);
   }
   const [ mostUpvoted, setMostUpvoted ] = useState('');
   const [ mostSimilar, setMostSimilar ] = useState('');
