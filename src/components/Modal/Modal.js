@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, IntlProvider } from 'react-intl';
 import './Modal.scss';
-
-import { addLocaleData } from 'react-intl';
-import { IntlProvider } from 'react-intl';
 
 import messages_ko from '../../translations/ko.json';
 import messages_en from '../../translations/en.json';
@@ -15,9 +12,6 @@ import messages_en from '../../translations/en.json';
 //   buttonConfig: buttonNameSet;
 //   canBeClosedByClickOutside: boolean;
 // }
-
-addLocaleData([...locale_en, ...locale_ko]);
-
 const messages = {
   ko: messages_ko,
   en: messages_en,
@@ -34,8 +28,8 @@ const Modal = props => {
     cancel: 'modal-button cancel-with-light-black',
   };
   useEffect(() => {
-    addEventListener('keyup', keyboardListenerFunction, true);
-    return () => removeEventListener('keyup', keyboardListenerFunction, true);
+    window.addEventListener('keyup', keyboardListenerFunction, true);
+    return () => window.removeEventListener('keyup', keyboardListenerFunction, true);
   }, []);
 
   const keyboardListenerFunction = event => {

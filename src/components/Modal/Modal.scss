@@ -52,26 +52,26 @@
         }
 
         &.confirm-with-blue-text {
-          color: $classum-blue;
+          color: $goalie-blue;
         }
 
         &.warning-with-red {
           padding: 7px 12px 7px 12px;
-          background-color: $classum-red;
+          background-color: $goalie-red;
           color: white;
 
           &:hover {
-            background-color: $classum-red-darker-for-hover;
+            background-color: $goalie-red-darker-for-hover;
           }
         }
 
         &.submit-with-blue {
           padding: 7px 12px 7px 12px;
-          background-color: $classum-blue;
+          background-color: $goalie-blue;
           color: white;
 
           &:hover {
-            background-color: $classum-blue-darker-for-hover;
+            background-color: $goalie-blue-darker-for-hover;
           }
         }
 

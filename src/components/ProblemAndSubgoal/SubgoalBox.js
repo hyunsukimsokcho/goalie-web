@@ -7,10 +7,51 @@ import { push } from 'connected-react-router';
 import firebase, { auth } from '../../firebase';
 import { submitStatus, makeId, freshLabels } from '../../utils';
 import showToast from '../Toast/Toast';
+import { openModal, closeModal } from '../Modal/Modal';
 
 const SubgoalBox = props => {
   const [ isLoading, setIsLoading ] = useState(false);
   const [ buttonAvailable, setButtonAvailable ] = useState(true);
+  const saveModalConfig = {
+    title: 'modal.title.save',
+    description: 'subgoalBox.willYouSave',
+    buttonConfig: {
+      'modal.button.return': [
+        'default',
+        () => {
+          closeModal();
+        },
+      ],
+      'modal.button.save': [
+        'submit',
+        () => {
+          submitSubgoal();
+          closeModal();
+        },
+      ],
+    },
+    closable: true,
+  };
+  const submitModalConfig = {
+    title: 'modal.title.submit',
+    description: 'subgoalBox.willYouSubmit',
+    buttonConfig: {
+      'modal.button.return': [
+        'default',
+        () => {
+          closeModal();
+        },
+      ],
+      'modal.button.submit': [
+        'warning',
+        () => {
+          submitSubgoal();
+          closeModal();
+        },
+      ],
+    },
+    closable: true,
+  };
   useEffect(() => {
     if (props.isStatLoading) {
       props.setIsStatLoading(false);
@@ -87,9 +128,9 @@ const SubgoalBox = props => {
       />
       <div className={"subgoal-submit-button-container"}>
         <Button 
-          theme={"primary"} 
+          theme={props.isRevise ? "primary": "black"} 
           textId={props.isRevise ? (props.isSubmitted? "button.alreadySubmitted" : "button.revise") : "button.submit"} 
-          onClick={submitSubgoal}
+          onClick={props.isRevise ? ()=>openModal(submitModalConfig) : ()=>openModal(saveModalConfig)}
           isDisabled={buttonAvailable || checkValidProblem() || checkVoidSubgoal(props.subgoal) || (props.isSubmitted && props.isRevise)}
           isLoading={isLoading}
         />

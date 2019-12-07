@@ -32,6 +32,9 @@
 
   "subgoalBox.writeDown": "Write down the subgoals.",
   "subgoalBox.revise": "Revise your subgoals.",
+  "subgoalBox.willYouSave": "Do you want to save your code design?",
+  "subgoalBox.willYouSubmit": "Once submitted, you cannot re-submit the subgoals for the same problem. Improve your code design with shared examples. Still, will you submit?",
+
   "button.alreadySubmitted": "Already submitted",
   "subgoalDnd.minimumWarning": "At least one step is required.",
   
@@ -48,5 +51,11 @@
   "toast.welcome": "Welcome,",
   "toast.pleaseSignin": "Please sign in, to share code design with others.",
   "toast.submitted": "Excellent! Thank you for your great job, and explore other exciting problems!",
-  "toast.saved": "Saved"
+  "toast.saved": "Saved",
+
+  "modal.button.return": "Cancel",
+  "modal.button.save": "Save",
+  "modal.button.submit": "Submit",
+  "modal.title.save": "Save code design",
+  "modal.title.submit": "Submit code design"
 }
