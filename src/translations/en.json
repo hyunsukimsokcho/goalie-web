@@ -30,7 +30,7 @@
   "problemBox.inputexample": "Input Example",
   "problemBox.outputexample": "Output Example",
 
-  "subgoalBox.writeDown": "Write down the steps to get the correct answer (in English).",
+  "subgoalBox.writeDown": "Write down the steps to get the correct answer.",
   "subgoalBox.revise": "Revise your steps to get the answer correctly and efficiently.",
   "subgoalBox.willYouSave": "Do you want to save your code design?",
   "subgoalBox.willYouSubmit": "Once submitted, you cannot re-submit the code design for the same problem. Improve your code design with shared examples. Still, will you submit?",
