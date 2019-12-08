@@ -23,7 +23,7 @@ const SubgoalExamples = props => {
   const parsedSubgoal = concatSubgoal(props.subgoal);
   const computeSim = exampleObj => {
     const parsedExample = concatSubgoal(exampleObj.content);
-    return stringSimilarity(parsedSubgoal, parsedExample);
+    return stringSimilarity.compareTwoStrings(parsedSubgoal, parsedExample);
   }
   const [ mostUpvoted, setMostUpvoted ] = useState('');
   const [ mostSimilar, setMostSimilar ] = useState('');
