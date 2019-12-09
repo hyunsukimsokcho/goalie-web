@@ -62,7 +62,7 @@ const ExampleBox = props => {
   return (
     <div className={"example-box-container"} id={props.id}>
       <FormattedMessage id={labelId} defaultMessage={"loading"}>
-        {msg => <div className={"example-box-label"}>{msg}</div>}
+        {msg => <div className={"example-box-label"}>{msg} {props.index > 2 && props.index - 2}</div>}
       </FormattedMessage>
       <div className={"example-contents-container"}>
         {props.exampleTuple && 
