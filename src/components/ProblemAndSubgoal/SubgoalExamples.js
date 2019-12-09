@@ -7,6 +7,7 @@ import ExampleBox from './ExampleBox';
 import firebase, { auth } from '../../firebase';
 import { concatSubgoal } from '../../utils';
 
+var randomExNumMax;
 
 const SubgoalExamples = props => {
   const computeUpvotes = exampleObj => {
@@ -28,9 +29,8 @@ const SubgoalExamples = props => {
   const [ mostUpvoted, setMostUpvoted ] = useState('');
   const [ mostSimilar, setMostSimilar ] = useState('');
   const [ latest, setLatest ] = useState('');
-  const [ randomPick, setRandomPick ] = useState('');
-  const [ randomPickEx, setRandomPickEx ] = useState();
   const [ examples, setExamples ] = useState([]);
+  const [ randomExamples, setRandomExamples ] = useState([]);
   const [ isExampleFetched, setIsExampleFetched ] = useState(false);
   const [ email, setEmail ] = useState('');
   const meta = props.pathname.split('/')[1];
@@ -74,12 +74,14 @@ const SubgoalExamples = props => {
                   });
                   setMostSimilar(temp.length!==0 && temp[0][0]);
                   temp.splice(0, 1);
-                  const randInd = Math.floor(Math.random() * temp.length);
-                  if (temp.length!==0 && temp[randInd][0]) {
-                    setRandomPick(temp.length!==0 && temp[randInd][0]);
-                    setRandomPickEx(exampleCollection[temp.length!==0 && temp[randInd][0]]);
+                  temp.sort((ex1, ex2) => {
+                    return 0.5 - Math.random();
+                  });
+                  if (temp.length!==0) {
+                    setRandomExamples(temp.length!==0 && temp.map(ex => [ex[0], exampleCollection[ex[0]]]));
                     props.setMoreExamplesDisabled(false);
                   }
+                  randomExNumMax = temp.length;
                 }
               });
             }
@@ -94,6 +96,7 @@ const SubgoalExamples = props => {
         });
     }
   });
+
   const renderExamples = (exampleTuple, index) => {
     if (exampleTuple && exampleTuple[1]) {
       return (
@@ -114,7 +117,7 @@ const SubgoalExamples = props => {
     <>
       <div className={"subgoal-examples-conatiner"}>
         {isExampleFetched && examples.map((exampleTuple, i) => renderExamples(exampleTuple, i))}
-        {randomPick && isExampleFetched && props.moreSubgoal && renderExamples([randomPick, randomPickEx], 3)}
+        {isExampleFetched && props.randomExNum > 0 && randomExamples.slice(0, Math.min(props.randomExNum, randomExNumMax)).map((randomExampleTuple, i) => renderExamples(randomExampleTuple, 3 + i))}
       </div>
     </>
   )
@@ -124,3 +127,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { push })(SubgoalExamples);
+
+export { randomExNumMax };

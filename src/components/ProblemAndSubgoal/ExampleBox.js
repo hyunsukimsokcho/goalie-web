@@ -16,7 +16,7 @@ const ExampleBox = props => {
       labelId = 'exampleBox.similar';
     } else if (props.index === 2) {
       labelId = 'exampleBox.latest';
-    } else if (props.index === 3) {
+    } else if (props.index >= 3) {
       labelId = 'exampleBox.random';
     }
   }
